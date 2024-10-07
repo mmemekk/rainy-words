@@ -1,13 +1,33 @@
 
 const {io,httpServer} = require('./serverfunctions/socket.js');
-const {addUser,username} = require('./serverfunctions/serverdata.js');
+const {addUser,get_userInfo,removeUser} = require('./serverfunctions/serverdata.js');
+
+
+
+
+
 io.on('connection', (socket) => {
     console.log("client connected");
 
+
+
     socket.on("addUser", (input) => {
-        addUser(input);
-        console.log(username);
+        addUser(input,socket);
+        console.log(socket.id);
+        console.log(get_userInfo());
     })
+
+
+
+
+
+
+
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+        removeUser(socket.id);
+        console.log(get_userInfo());
+      });
 
 
 });

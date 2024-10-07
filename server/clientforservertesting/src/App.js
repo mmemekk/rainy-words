@@ -17,6 +17,9 @@ function App() {
         };
     }, []);
 
+    socket.on("msg", (x) => {console.log(x)});
+
+
     const sendMessage = (e) => {
         e.preventDefault();
         if (input) {
