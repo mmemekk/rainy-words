@@ -15,8 +15,8 @@ function App() {
         });
 
         // Listener for receiving messages with the "receiveMessage" event
-        socket.on('receiveMessage', (msg) => {
-            console.log('Received from server:', msg);
+        socket.on('receiveMessage', (msg,sender) => {
+            console.log('Received from server:', msg ,'from',sender);
         });
 
         return () => {
@@ -44,7 +44,7 @@ function App() {
     const sendOtherMessage = (e) => {
         e.preventDefault();
         if (otherInput) {
-            socket.emit('sentMessage', otherInput);
+            socket.emit('sendMessage', otherInput);
             setOtherInput(''); // Clear the second input field
         }
     };

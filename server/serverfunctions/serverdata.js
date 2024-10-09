@@ -21,14 +21,22 @@ exports.removeUser = function(socketId,io){
         }
     })
     count--;
-    io.emit("userRemoved",exports.get_userInfo()); //msut check if info correct
+    io.emit("userRemoved",exports.get_userInfo()); //must check if info correct
 }
 
+exports.get_nameFromId = function(socketId){
+    for(const user of userInfo){
+        if(user.id === socketId){
+            return user.name;
+        }
+    }
+    return null;
+}
 
 exports.get_userInfo = function(){
     return userInfo;
 }
 
-exports.getcount = function(){
+exports.get_count = function(){
     return count;
 }
