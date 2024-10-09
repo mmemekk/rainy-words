@@ -17,15 +17,13 @@ io.on('connection', (socket) => {
         console.log(get_userInfo());
     })
 
-
-
-
-
-
+    socket.on("sentMessage", (message) =>{
+        socket.broadcast.emit("receiveMessage", message)
+    })
 
     socket.on('disconnect', () => {
         console.log('user disconnected');
-        removeUser(socket.id);
+        removeUser(socket.id,io);
         console.log(get_userInfo());
       });
 

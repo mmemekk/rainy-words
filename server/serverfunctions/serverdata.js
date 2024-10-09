@@ -14,14 +14,14 @@ exports.addUser = function(input,socket){
     }
 }
 
-exports.removeUser = function(socketId){
+exports.removeUser = function(socketId,io){
     userInfo.forEach((user,index) =>{
         if(user.id === socketId){
             userInfo.splice(index,1);
         }
     })
     count--;
-    socket.emit("userRemoved",get_userInfo());
+    io.emit("userRemoved",exports.get_userInfo()); //msut check if info correct
 }
 
 
