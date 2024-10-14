@@ -8,7 +8,6 @@ io.on('connection', (socket) => {
 
     socket.on("addUser", (input) => {
         addUser(input, socket);
-        console.log(socket.id);
         console.log(get_userInfo());
     });
 

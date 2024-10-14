@@ -1,4 +1,4 @@
-exports.wordlist = {
+exports.wordList = {
 
 3:[
     "act", "bat", "cat", "dog", "ear", "fan", "gem", "hat", "ice", "jar", "key", 
