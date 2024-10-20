@@ -1,6 +1,6 @@
 
-function Input(){
-	return <input type="text" className="inputName" placeholder="Enter Your Name"></input>;
+function Input({type,className,placeHolder,handleInput}){
+	return <input type={type} className={className} placeholder={placeHolder} onChange={handleInput}></input>;
 }
 
 export default Input;
