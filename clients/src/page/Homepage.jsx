@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../App.css';
+import '../styles/Homepage.css';
 import {socket} from "../utils/socket.jsx";
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -61,6 +61,8 @@ const Home = () =>{
     
     return (
         <>
+        <div className='homebg'>
+          <h>hello</h>
           <div className="landdiv">
             {isVisible && (
               <>
@@ -103,7 +105,9 @@ const Home = () =>{
             </div>
             </>
           )}
+        </div>
         </>
+
       );
 
   

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../App.css';
+import '../styles/Welcomepage.css';
 import {socket} from "../utils/socket.jsx";
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -28,10 +28,12 @@ const Welcome =() =>{
     }, []); 
 
     return (
-        <>                
+        <> 
+        <div className="welcomebg">
          <h className="welcomeText">Welcome</h>
          <h className="nameText">{userName}</h>
          <Button className="btnPlay" placeHolder='play' onClick={handlePlayButtonClick}/>
+         </div>
         </>
     );
                 

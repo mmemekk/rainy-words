@@ -1,7 +1,7 @@
-/* Import the Super Mario 256 font */
+
 @font-face {
   font-family: 'SuperMario256';
-  src: url('/SuperMario256.ttf') format('truetype');
+  src: url('../../public/SuperMario256.ttf') format('truetype');
 }
 
 body, html {
@@ -94,8 +94,8 @@ body, html {
 }
 
 
-body {
-  background-image: url('public/Netcentric.jpg');
+/* body {
+  background-image: url('../../public/Netcentric.jpg');
   background-position: center center;
   background-size: cover; 
   background-repeat: no-repeat;
@@ -104,7 +104,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-}
+} */
 
 .errormessage {
   z-index: 9999; 

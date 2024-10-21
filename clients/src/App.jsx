@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import io from 'socket.io-client';
 import { useEffect, useState } from 'react';
-import './App.css';
+
 
 import Home from "./page/Homepage.jsx"
 import Welcome from "./page/Welcomepage.jsx"
