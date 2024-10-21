@@ -1,0 +1,26 @@
+.userListContainer {
+    position: absolute; /* Change to absolute for positioning */
+    width: 30vw; /* Set desired width */
+    height: 85vh; /* Set height */
+    top: 50%; /* Move down 50% of the viewport height */
+    right: 45%; /* Move right 50% of the viewport width */
+    transform: translate(-50%, -50%); /* Center it */
+    background-color: rgba(36, 86, 102, 0.7); /* Semi-transparent background color */
+    border-radius: 30px; /* Rounded corners */
+    padding: 20px; /* Padding inside the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow effect */
+    display: flex; /* Flexbox for vertical alignment */
+    flex-direction: column; /* Align items in a column */
+    justify-content: center; /* Center items vertically */
+
+}
+.userItem {
+    padding: 8vh; /* Padding for each user item */
+    border-bottom: 1px solid #fff; /* Optional: Add a border between items */
+    color: white; /* Text color for user names */
+    text-align: center; /* Center the text */
+}
+
+.userItem:last-child {
+    border-bottom: none; /* Remove border for the last item */
+}
