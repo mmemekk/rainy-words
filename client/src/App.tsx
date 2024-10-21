@@ -6,6 +6,7 @@ import './App.css';
 function App(){
   return <div className="landdiv">
     <InputName></InputName><ButtonNext></ButtonNext>
+  
   </div>
 }
 

@@ -4,30 +4,20 @@ import io from 'socket.io-client';
 import { useEffect, useState } from 'react';
 import './App.css';
 
-import Home from "./home.jsx"
-
+import Home from "./page/Homepage.jsx"
+import Welcome from "./page/Welcomepage.jsx"
+import Lobby from "./page/Lobbypage.jsx"
 
 function App() {
-
-
-  // useEffect(() => {
-  //   if (!socket) {
-  //     socket = io("localhost:3000/"); 
-  //   }
-  //   return () => {
-  //     if (socket) {
-  //       socket.disconnect(); // Properly disconnect the socket on unmount
-  //       socket = null; // Reset the socket variable
-  //     }
-  //   };
-  // }, []); 
-
 
   return (
     <Router>
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/welcome" element={<Welcome/>} />
+          <Route path="/lobby" element={<Lobby/>} />
+
         </Routes>
       </div>
     </Router>
@@ -35,5 +25,3 @@ function App() {
 }
 
 export default App
-export 
-{/* <div className="ContainerL"><InputName/><ButtonX/></div>; */}

@@ -8,15 +8,15 @@ const httpServer = createServer(app);
 const io = new Server(httpServer,{
     cors: {
 
-        origin: '*' //allows connections from all clients
+        origin: 'http://localhost:5173' //allows connections from all clients
 
     }
 });
 
-app.use(express.static(path.join(__dirname, '../clientforservertesting/build'))); // Adjust the path based on your structure
+// app.use(express.static(path.join(__dirname, '../../clients/dist'))); // Adjust the path based on your structure
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../clientforservertesting/build/index.html'));
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../../clients/dist/index.html'));
+// });
 
 module.exports = {io, httpServer};

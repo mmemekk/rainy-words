@@ -1,5 +1,5 @@
 const { io, httpServer } = require('./serverfunctions/socket.js');
-const { addUser, removeUser, get_userInfo } = require('./serverfunctions/serverdata.js');
+const { addUser, removeUser, get_userInfo, get_nameFromId  } = require('./serverfunctions/serverdata.js');
 const { sendMessage } = require('./serverfunctions/chatmessage.js');
 const { trackTime } = require('./serverfunctions/timer.js'); 
 
@@ -9,6 +9,10 @@ io.on('connection', (socket) => {
     socket.on("addUser", (input) => {
         addUser(input, socket);
         console.log(get_userInfo());
+    });
+
+    socket.on("getUserName",(id) =>{
+        socket.emit("userName",get_nameFromId(id));
     });
 
     socket.on("sendMessage", (message) => {

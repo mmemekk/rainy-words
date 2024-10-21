@@ -9,7 +9,7 @@ body, html {
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: 'Super Mario 256'; /* Fallback fonts */
+  font-family: 'Super Mario 256';
   background-color: #87CEEB;
 }
 
@@ -58,7 +58,7 @@ body, html {
 }
 
 .landdiv{
-  /* background-color: #245666; */
+
   width: 50%;
   margin: 0;
   height: 580px;
@@ -80,10 +80,8 @@ body, html {
   font-family: 'SuperMario256';
   margin-top: 140px;
   text-align: center;
-  /* width: 50%; */
   height: 100px;
   width: 885px;
-  /* padding: 10px; */
   border-radius: 64px;
   border-width: 0px;
   font-size: 36px;
@@ -95,53 +93,105 @@ body, html {
   opacity: 65%;
 }
 
+
 body {
   background-image: url('public/Netcentric.jpg');
   background-position: center center;
-  background-size: cover;  /* Zoom in to cover the entire screen */
-  background-repeat: no-repeat;  /* Prevent repeating the image */
-  background-position: -1100px center;
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .errormessage {
-  width: 700px;
-  height: 350px;
+  z-index: 9999; 
+  width: 80%;               /* Set width as a percentage of the viewport width */
+  max-width: 900px;        /* Optional: Set a maximum width for larger screens */
+  height: auto;            /* Use auto height to accommodate content */
+  min-height: 450px;       /* Set a minimum height for the box */
   background-color: #183e4a;
   color: #fff;
-  padding: 10px;
+  padding: 20px;           /* Adjust padding for better spacing */
   border-radius: 30px;
-  position: absolute;
+  position: fixed;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 50%;               /* Change right to left for proper centering */
+  transform: translate(-50%, -50%); /* Center the box */
   font-family: 'SuperMario256';
-  font-size: 36px;
+  font-size: 2.5vw;          /* Set font size relative to viewport width */
   text-align: center;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-  box-sizing: border-box; /* Include padding and border in width calculation */
-    /* Center text vertically */
-  display: flex; /* Use Flexbox for centering */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-
+  box-sizing: border-box; 
+  display: flex;
+  justify-content: center;
+  align-items: center; 
 }
 .errormessage h {
-  margin: 0; /* Remove default margins */
-  line-height: 2.0; /* Increases spacing between lines */
+  margin: 0;
+  line-height: 2.0; 
 }
 
 .close-btn {
+  z-index: 20000; 
   background: none;
   border: none;
   font-size: 50px;
   font-weight: bold;
   font-family: 'SuperMario256';
   color: rgb(239, 34, 34);
-  position: absolute;
-  transform: translate(930px, 190px);
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(800%, -350%);
   cursor: pointer;
   outline: none;
 }
 .close-btn:hover {
-  color: #e9922e; /* Change color on hover */
+  color: #e9922e;
+}
+
+
+/* -------------------------------------------------*/
+/* Welcome Page*/
+
+.welcomeText {
+  font-family: 'SuperMario256';
+  color: #245666;    /* Color for "Welcome" */
+  font-size: 6vw;             /* Responsive font size based on viewport width */
+  position:absolute;
+  top:35%;
+  left:50%;
+  transform: translate(-50%, -50%); 
+
+}
+
+.nameText {
+  font-family: 'SuperMario256';
+  color: #1E708A;             /* Color for "Name" */
+  font-size: 6vw;             /* Responsive font size based on viewport width */
+  position:absolute;
+  top:48%;
+  left:50%;
+  transform: translate(-50%, -50%); 
+}
+
+
+
+.btnPlay {
+  color: #ffffff;
+  background-color: #245666;
+  width: 480px;
+  height: 100px;
+  border-radius: 64px;
+  font-family: "SuperMario256";
+  font-size: 48px;
+  border-width: 0px;
+  cursor: pointer;
+  position: absolute;
+  top: 60%;
+  left: 50%; /* Change right to left */
+  transform: translate(-50%, -50%); /* Center the button */
 }

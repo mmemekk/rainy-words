@@ -116,4 +116,7 @@ body, html {
 body {
   background-image: url('public/Netcentric.jpg');
   background-position: center center;
+  background-size: cover;  /* Zoom in to cover the entire screen */
+  background-repeat: no-repeat;  /* Prevent repeating the image */
+  background-position: -1100px center;
 }
