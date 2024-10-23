@@ -14,12 +14,12 @@ const Home = () =>{
     const [errorMessage, setErrorMessage] = useState(false);
     const [noInputMessage, setNoInputMessage] = useState(false);
     const navigate = useNavigate();
-  
+
     function handleInput(event){
       let { value } = event.target;
       setName(value);
     }
-  
+
     function handleNextButtonClick () {
         if(name === ''){
             setNoInputMessage(true);
@@ -29,7 +29,7 @@ const Home = () =>{
         setName('');
         }
     };
-  
+
     function addUser(){
       socket.on("success_addUser", () =>{
         setIsVisible(true);
@@ -50,38 +50,37 @@ const Home = () =>{
     function closeNoInputMessage(){
         setNoInputMessage(false);
     }
-  
-  
+
+
     useEffect(() => {
-  
+
       addUser();
       errorUser();
-  
-    }, []);  
-    
+
+    }, []);
+
     return (
         <>
         <div className='homebg'>
-          <h>hello</h>
           <div className="landdiv">
             {isVisible && (
               <>
-                <Input 
-                  type="text" 
-                  className="inputName" 
-                  placeHolder="Enter your name" 
-                  handleInput={handleInput} 
+                <Input
+                  type="text"
+                  className="inputName"
+                  placeHolder="Enter your name"
+                  handleInput={handleInput}
                   value={name}
                 />
-                <Button 
-                  className='btnNext' 
-                  placeHolder='Next' 
-                  onClick={handleNextButtonClick} 
-                /> 
+                <Button
+                  className='btnNext'
+                  placeHolder='Next'
+                  onClick={handleNextButtonClick}
+                />
               </>
             )}
           </div>
-      
+
           {errorMessage && (
             <>
             <div className="errormessage">
@@ -110,8 +109,7 @@ const Home = () =>{
 
       );
 
-  
+
 }
 
 export default Home;
-

@@ -97,9 +97,9 @@ body, html {
 /* body {
   background-image: url('../../public/Netcentric.jpg');
   background-position: center center;
-  background-size: cover; 
+  background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;  
+  background-attachment: fixed;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -107,7 +107,7 @@ body, html {
 } */
 
 .errormessage {
-  z-index: 9999; 
+  z-index: 9999;
   width: 80%;               /* Set width as a percentage of the viewport width */
   max-width: 900px;        /* Optional: Set a maximum width for larger screens */
   height: auto;            /* Use auto height to accommodate content */
@@ -124,18 +124,18 @@ body, html {
   font-size: 2.5vw;          /* Set font size relative to viewport width */
   text-align: center;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-  box-sizing: border-box; 
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 .errormessage h {
   margin: 0;
-  line-height: 2.0; 
+  line-height: 2.0;
 }
 
 .close-btn {
-  z-index: 20000; 
+  z-index: 20000;
   background: none;
   border: none;
   font-size: 50px;
@@ -164,7 +164,7 @@ body, html {
   position:absolute;
   top:35%;
   left:50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
 
 }
 
@@ -175,7 +175,7 @@ body, html {
   position:absolute;
   top:48%;
   left:50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
 }
 
 
@@ -195,3 +195,6 @@ body, html {
   left: 50%; /* Change right to left */
   transform: translate(-50%, -50%); /* Center the button */
 }
+
+
+/* lobby */
