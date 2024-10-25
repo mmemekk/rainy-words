@@ -1,7 +1,9 @@
 const { io, httpServer } = require('./serverfunctions/socket.js');
 const { addUser, removeUser, get_userInfo, get_nameFromId  } = require('./serverfunctions/serverdata.js');
 const { sendMessage } = require('./serverfunctions/chatmessage.js');
+const {setgameMode} = require('./serverfunctions/randomword.js')
 const { trackTime } = require('./serverfunctions/timer.js'); 
+const {sendingWord} = require('./serverfunctions/randomword');
 
 io.on('connection', (socket) => {
     console.log("Client connected");
@@ -20,11 +22,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on("gameMode", (mode) => {
-        setDifficulties(mode);
+        setgameMode(mode);
     });
-
+    
     socket.on("startButton", () => {
         trackTime(socket);
+        sendingWord();
     });
 
     socket.on('disconnect', () => {

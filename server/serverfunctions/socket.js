@@ -8,7 +8,8 @@ const httpServer = createServer(app);
 const io = new Server(httpServer,{
     cors: {
 
-        origin: 'http://localhost:5173' //allows connections from all clients
+        // origin: 'http://localhost:5173' //allows connections from all clients
+        origin: "*"
 
     }
 });
@@ -17,6 +18,12 @@ const io = new Server(httpServer,{
 
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, '../../clients/dist/index.html'));
+// });
+
+// app.use(express.static(path.join(__dirname, '../clientforservertesting/build'))); // Adjust the path based on your structure
+
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../clientforservertesting/build/index.html'));
 // });
 
 module.exports = {io, httpServer};

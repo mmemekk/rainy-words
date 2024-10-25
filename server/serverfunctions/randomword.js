@@ -1,5 +1,10 @@
+const { io } = require('./socket.js');
 const {selectMode} = require('./gamemode.js'); 
-const {wordList} = require('./wordlist.js')
+const {wordList} = require('./wordlist.js');
+const {isTimerRunning} = require('./timer.js');
+
+let gameMode;
+let wordSendingInterval = null;
 
 let usedWords = {
     3:[],
@@ -7,6 +12,10 @@ let usedWords = {
     5:[],
     6:[],
     7:[]
+}
+
+exports.setgameMode = function(mode){
+    gameMode = mode;
 }
 
 
@@ -40,10 +49,17 @@ exports.getRandomWord = function(){
 }
 
 exports.sendingWord = function(){
-    setInterval(() => {
+    console.log("start sending word");
+    wordSendingInterval = setInterval(() => {
+        if(isTimerRunning()){
         const word = exports.getRandomWord();
         console.log(word);
-    },2000);
+        io.emit("newWord",word);
+        }
+    },5000);
 }
 
-exports.sendingWord();
+exports.stopSendingWord = function(){
+    clearInterval(wordSendingInterval);
+}
+
