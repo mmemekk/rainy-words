@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Home from "./page/Homepage.jsx"
 import Welcome from "./page/Welcomepage.jsx"
 import Lobby from "./page/Lobbypage.jsx"
+import Game from "./page/Gamepage.jsx"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/welcome" element={<Welcome/>} />
           <Route path="/lobby" element={<Lobby/>} />
+          <Route path="/gamepage" element={<Game/>} />
 
         </Routes>
       </div>

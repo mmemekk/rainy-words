@@ -1,0 +1,31 @@
+.game-container {
+    position: relative;
+    overflow: hidden; /* Prevent overflow */
+    height: 100vh; /* Full height for the game container */
+    background-color: #f0f0f0; /* Background color */
+}
+
+.falling-words {
+    position: absolute;
+    width: 100%; /* Full width for the container */
+    pointer-events: none; /* Ignore clicks on falling words */
+}
+
+.falling-word {
+    position: absolute;
+    color: black; /* Text color */
+    font-size: 24px; /* Font size */
+    animation: fall 5s linear forwards; /* Animation */
+}
+
+/* Keyframes for falling animation */
+@keyframes fall {
+    0% {
+        top: -50px; /* Start above the screen */
+        opacity: 1; /* Fully visible */
+    }
+    100% {
+        top: 100vh; /* Move to the bottom of the viewport */
+        opacity: 0; /* Fade out */
+    }
+}

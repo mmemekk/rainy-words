@@ -8,11 +8,16 @@ import Button from "../components/Button";
 const Lobby = ()=>{
 
     const[users,setUsers] = useState(["mekk","joe","kong","zara","jj"]);
+    const navigate = useNavigate();
+
+    function handlePlayButtonClick(){
+        navigate('/gamepage');
+    }
 
 
     useEffect(() => {
 
-        socket.on("userList", (userNames)=>{
+        socket.on("userList", (userNames)=>{ //NEED TO BE IMPLEMNTED IN SERVER
             setUsers(userNames);
         })
 
@@ -53,7 +58,9 @@ const Lobby = ()=>{
                     <button className='goRight'><p className='goRightButt'>&gt;</p></button>
                 </div>
                 <div className='ModeDes'>{modeDes[keys]}</div>
-                <div className='playButton'> <button className='Play'><p className='Playtext'>Play</p></button></div>
+                <div className='playButton'> 
+                    <button className='Play' onClick={handlePlayButtonClick}><p className='Playtext'>Play</p></button>
+                    </div>
             </div>
             <div><button className='Chatbox'>Chat</button></div>
         </div>
