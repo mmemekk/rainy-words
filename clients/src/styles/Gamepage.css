@@ -1,14 +1,16 @@
 .game-container {
-    position: relative;
     overflow: hidden; /* Prevent overflow */
     height: 100vh; /* Full height for the game container */
     background-color: #f0f0f0; /* Background color */
+    background-image: url("../../public/Netcentric.jpg");
+    background-size: cover;
 }
 
 .falling-words {
-    position: absolute;
-    width: 100%; /* Full width for the container */
     pointer-events: none; /* Ignore clicks on falling words */
+    font-size: 64px;
+    text-align: center;
+    justify-content: center;
 }
 
 .falling-word {
@@ -28,4 +30,17 @@
         top: 100vh; /* Move to the bottom of the viewport */
         opacity: 0; /* Fade out */
     }
+}
+
+.topBar{
+    display: flex;
+    text-align: center;
+    background-color: #F6E8E8;
+    justify-content: center;
+    border-radius: 32px;
+    width: 1303px;
+    margin: auto;
+    margin-top: 2%;
+    height: 78px;
+    overflow: hidden;
 }
