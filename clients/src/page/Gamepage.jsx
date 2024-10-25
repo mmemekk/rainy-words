@@ -16,11 +16,14 @@ const Game = ()=>{
 
         //emit only onces??
         socket.on("newWord", (word) => {
+            console.log(word);
             setFallingWords((prevWords) => [
                 ...prevWords,
                 { text: word, id: Date.now() } // Use timestamp as a unique id
             ]);
         });
+
+s
 
     }, []); 
 
