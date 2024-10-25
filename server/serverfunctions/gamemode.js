@@ -1,6 +1,5 @@
 
 exports.easyMode = function(rnd){
-    console.log(rnd);
     if (rnd < 40) return 3;
     else if (rnd < 70) return 4;
     else if (rnd < 90) return 5;
@@ -9,7 +8,6 @@ exports.easyMode = function(rnd){
 }
 
 exports.mediumMode = function(rnd){
-    console.log(rnd);
     if (rnd < 20) return 3;
     else if (rnd < 45) return 4;
     else if (rnd < 75) return 5;
@@ -18,7 +16,6 @@ exports.mediumMode = function(rnd){
 }
 
 exports.hardMode = function(rnd){
-    console.log(rnd);
     if (rnd < 5) return 3;
     else if (rnd < 15) return 4;
     else if (rnd < 35) return 5;

@@ -27,7 +27,6 @@ io.on('connection', (socket) => {
     
     socket.on("startButton", () => {
         trackTime(socket);
-        sendingWord();
     });
 
     socket.on('disconnect', () => {
