@@ -45,6 +45,7 @@ exports.wordList = {
     "whisky", "global", "helper", "income", "joyful", "kingly", "lesson", "motive", 
     "normal", "option", "parade", "quirks", "random", "system", "ticket", "upward", 
     "valley", "queers", "zigzag"
+
 ],
 
 7:[

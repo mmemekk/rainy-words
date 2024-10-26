@@ -1,7 +1,7 @@
 const { io } = require('./socket.js');
 const {sendingWord} = require('./randomword.js');
 
-const fixedTime = 15; // Set default timer (e.g., 300 seconds)
+const fixedTime = 300; // Set default timer (e.g., 300 seconds)
 let timerInterval = null; // To store the interval ID
 let timer = fixedTime; // Start with the default fixedTime
 

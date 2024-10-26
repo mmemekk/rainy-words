@@ -24,18 +24,16 @@ exports.getWordLength = function(mode){
     return wordLength;
 }
 
-// exports.getWordPosition = function(){
- 
-// }
 
 exports.getRandomWord = function(){
     let wordLength = exports.getWordLength("hard");
     console.log("this wordlength", wordLength);
     let availableWord = wordList[wordLength].filter(word => !usedWords[wordLength].includes(word));  //array of available word
 
-    if(availableWord.wordLength === 0){ // if all the words are used up
+    if(availableWord.length === 0){ // if all the words are used up
+        "THE WORD IS USED UP"
         usedWords[wordLength] = [];
-        availableWord = wordlist[wordLength];
+        availableWord = wordList[wordLength];
     }
 
     const rndIndex = Math.floor(Math.random() * availableWord.length);

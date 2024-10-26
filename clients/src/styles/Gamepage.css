@@ -9,23 +9,52 @@
     position: absolute;
     width: 100%; /* Full width for the container */
     pointer-events: none; /* Ignore clicks on falling words */
+    overflow: hidden;
+    height: 100vh;
+    background-color: #f0f0f0;
+    background-image: url("../../public/Netcentric.jpg");
+    background-size: cover;
+}
+
+.falling-words {
+    pointer-events: none;
+    font-size: 64px;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 
 .falling-word {
     position: absolute;
-    color: black; /* Text color */
-    font-size: 24px; /* Font size */
-    animation: fall 5s linear forwards; /* Animation */
+    color: black;
+    font-size: 24px;
+    animation: fall 8s linear forwards;
 }
 
 /* Keyframes for falling animation */
 @keyframes fall {
     0% {
-        top: -50px; /* Start above the screen */
-        opacity: 1; /* Fully visible */
+        top: -50px;
+        opacity: 1;
     }
     100% {
-        top: 100vh; /* Move to the bottom of the viewport */
-        opacity: 0; /* Fade out */
+        top: 100vh;
+        opacity: 0;
     }
 }
+
+.topBar {
+    display: flex;
+    text-align: center;
+    background-color: #F6E8E8;
+    justify-content: center;
+    border-radius: 32px;
+    width: 1303px;
+    margin: auto;
+    margin-top: 2%;
+    height: 78px;
+    overflow: hidden;
+}
+
