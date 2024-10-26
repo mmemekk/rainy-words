@@ -77,8 +77,7 @@ s
 
         </div>
     );
- 
+
 }
 
 export default Game;
-
