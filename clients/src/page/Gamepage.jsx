@@ -6,7 +6,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 
 const Game = ()=>{
-
+    const navigate = useNavigate();
     const [fallingWords, setFallingWords] = useState([]);
     const [answer, setAnswer] = useState('');
     const [timer, setTimer] = useState({ minute: 5, second: 0 }); // State for timer (5 minutes)
@@ -36,9 +36,9 @@ const Game = ()=>{
         };
     }, []);
 
-s
-
-
+    function retoprevious(){
+        navigate('/lobbypage');
+    }
 
     function submitWord(){
         socket.emit("submitWord", answer);
@@ -52,7 +52,6 @@ s
 
     return (
         <div className="game-container">
-            <h1>Rainy Word Game</h1>
             <button onClick={retoprevious}>RE</button>
             <div className="topBar">
                 <p>Player1 Player2</p>
