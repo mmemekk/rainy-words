@@ -25,18 +25,18 @@ const Game = ()=>{
                 { text: word, position: randomPosition, id: Date.now() } // Use timestamp as a unique id
             ]);
         });
+
         socket.on('counter', (time) => {
             setTimer(time); // Update the timer state with the received time
         });
-
-
-
 
         return () => {
             socket.off("newWord");
             // socket.off('counter');
         };
     }, []);
+
+s
 
 
 
@@ -48,11 +48,6 @@ const Game = ()=>{
         let { value } = event.target;
         setAnswer(value);
       }
-    const navigate = useNavigate();
-
-    function retoprevious(){
-        navigate('/lobby');
-    }
 
 
     return (
@@ -73,12 +68,6 @@ const Game = ()=>{
             <button onClick={submitWord}>DONE</button>
 
 
-            <button onClick={retoprevious}>RE</button>
-            <div className="topBar">
-                <p>Player1 Player2</p>
-                <div className='clock'>Time</div>
-                <p>Plater3 Player4</p>
-            </div>
             <div className="falling-words">
                 {fallingWords.map((word) => (
                     <div key={word.id} className="falling-word" style={{ left: `${word.position}%` }}>{word.text}</div>
@@ -88,7 +77,8 @@ const Game = ()=>{
 
         </div>
     );
-
+ 
 }
 
 export default Game;
+
