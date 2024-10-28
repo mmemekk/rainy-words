@@ -15,6 +15,11 @@ const Game = ()=>{
 
     useEffect(() => {
 
+        // If socket.id is not defined, navigate to home and return early
+        if (!socket.id) {
+            navigate('/');
+            return;
+        }
 
         if(socket.id!==userState){
             setUserState(socket.id);
