@@ -7,6 +7,7 @@ import Button from "../components/Button";
 
 const Game = ()=>{
     const navigate = useNavigate();
+    const [userState, setUserState]=useState(socket.id);
     const [fallingWords, setFallingWords] = useState([]);
     const [answer, setAnswer] = useState('');
     const [timer, setTimer] = useState({ minute: 5, second: 0 }); // State for timer (5 minutes)
@@ -14,13 +15,20 @@ const Game = ()=>{
 
     useEffect(() => {
 
+
+        if(socket.id!==userState){
+            setUserState(socket.id);
+            navigate('/');
+            return;
+        }
+
         socket.emit("startButton");
-        console.log("emit");
 
 
-        socket.on("newWord", (word) => {
+
+        socket.on("newWord", (word,position) => {
             console.log(word);
-            const randomPosition = Math.floor(Math.random() * (90 - 10 + 1)) + 10; // Random left position (10-90%)
+            const randomPosition = position;
 
             const newWord = {
                 text: word,
@@ -32,10 +40,10 @@ const Game = ()=>{
 
             setTimeout(() => {
                 setFallingWords((prevWords) =>
-                    prevWords.filter((w) => w.id !== newWord.id) // Remove the word after the timer
+                    prevWords.filter((w) => w.text !== newWord.text) // Remove the word after the timer
                 );
                 // console.log("removeFallingword:");
-            }, 6000); 
+            }, 10000); 
 
         });
 
@@ -43,14 +51,22 @@ const Game = ()=>{
             setTimer(time); // Update the timer state with the received time
         });
 
+        socket.on("userInfo", (userInfo) =>{
+            setScore(userInfo);
+        })
+
         socket.on("updateScore", (userInfo) =>{
             setScore(userInfo);
             console.log(userInfo);
         })
 
         return () => {
+            socket.off("startButton");
             socket.off("newWord");
-            // socket.off('counter');
+            socket.off('counter');
+            socket.off("userInfo");
+            socket.off("updateScore");
+
         };
     }, []);
 
@@ -61,7 +77,7 @@ const Game = ()=>{
 
 
     function retoprevious(){
-        navigate('/lobbypage');
+        navigate('/');
     }
 
 
@@ -75,6 +91,9 @@ const Game = ()=>{
         const wordExist = fallingWords.some(word => word.text === answer);
         if(wordExist){
             socket.emit("submitWord",answer);
+
+            setFallingWords((prevWords) => prevWords.filter((word) => word.text !== answer));
+
         } else{
             console.log("no word founded");
         }
@@ -111,7 +130,13 @@ const Game = ()=>{
 
             <div className="falling-words">
                 {fallingWords.map((word) => (
-                    <div key={word.id} className="falling-word" style={{ left: `${word.position}%` }}>{word.text}</div>
+                    <div 
+                        key={word.id} 
+                        className={"falling-word"} 
+                        style={{ left: `${word.position}%` }}
+                    >
+                        {word.text}
+                    </div>
                 ))}
             </div>
 

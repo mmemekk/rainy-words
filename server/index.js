@@ -1,8 +1,8 @@
 const { io, httpServer } = require('./serverfunctions/socket.js');
-const { addUser, removeUser, get_userInfo, get_nameFromId  } = require('./serverfunctions/serverdata.js');
+const { addUser, removeUser, get_userInfo, get_nameFromId, get_count  } = require('./serverfunctions/serverdata.js');
 const { sendMessage } = require('./serverfunctions/chatmessage.js');
 const {setgameMode} = require('./serverfunctions/randomword.js')
-const { trackTime } = require('./serverfunctions/timer.js'); 
+const { trackTime, resetTimer,isGameRunning } = require('./serverfunctions/timer.js'); 
 const {sendingWord} = require('./serverfunctions/randomword');
 const { calculateScore } = require('./serverfunctions/scoring.js');
 
@@ -27,7 +27,10 @@ io.on('connection', (socket) => {
     });
     
     socket.on("startButton", () => {
+        console.log("start Button");
         trackTime(socket);
+        io.emit("gameStart");
+        io.emit("userInfo",get_userInfo());
     });
 
     socket.on("submitWord" , (word) =>{
@@ -39,6 +42,11 @@ io.on('connection', (socket) => {
         console.log('User disconnected');
         removeUser(socket.id, io);
         console.log(get_userInfo());
+        io.emit("userInfo",get_userInfo());
+
+        if(isGameRunning() && (get_count()===0)){
+            resetTimer();
+        }
     });
 });
 

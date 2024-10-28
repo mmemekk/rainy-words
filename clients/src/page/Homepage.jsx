@@ -9,12 +9,20 @@ import Button from "../components/Button";
 
 export let userName ='';
 const Home = () =>{
+  const navigate = useNavigate();
     const [name, setName] = useState('');
     const [isVisible, setIsVisible] = useState(true);
     const [errorMessage, setErrorMessage] = useState(false);
     const [noInputMessage, setNoInputMessage] = useState(false);
-    const navigate = useNavigate();
 
+
+    useEffect(() => {
+
+      addUser();
+      errorUser();
+
+    }, []);
+    
     function handleInput(event){
       let { value } = event.target;
       setName(value);
@@ -52,12 +60,7 @@ const Home = () =>{
     }
 
 
-    useEffect(() => {
 
-      addUser();
-      errorUser();
-
-    }, []);
 
     return (
         <>

@@ -20,7 +20,14 @@
     position: absolute;
     color: black;
     font-size: 24px;
-    animation: fall 6s linear forwards;
+    animation: fall 10s linear forwards;
+}
+
+
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 
@@ -47,3 +54,4 @@
     height: 78px;
     overflow: hidden;
 }
+
