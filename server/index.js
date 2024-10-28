@@ -4,6 +4,7 @@ const { sendMessage } = require('./serverfunctions/chatmessage.js');
 const {setgameMode} = require('./serverfunctions/randomword.js')
 const { trackTime } = require('./serverfunctions/timer.js'); 
 const {sendingWord} = require('./serverfunctions/randomword');
+const { calculateScore } = require('./serverfunctions/scoring.js');
 
 io.on('connection', (socket) => {
     console.log("Client connected");
@@ -28,6 +29,11 @@ io.on('connection', (socket) => {
     socket.on("startButton", () => {
         trackTime(socket);
     });
+
+    socket.on("submitWord" , (word) =>{
+        console.log("received worddddd:",word);
+        calculateScore(socket.id,word);
+    })
 
     socket.on('disconnect', () => {
         console.log('User disconnected');

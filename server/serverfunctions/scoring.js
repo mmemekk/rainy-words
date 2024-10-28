@@ -1,10 +1,9 @@
 const { io } = require('./socket.js');
+const {updateScore,get_userInfo} = require('./serverdata.js');
 
 
-let scoreWord = {
-    3:[],
-    4:[],
-    5:[],
-    6:[],
-    7:[]
+exports.calculateScore = function(socketID,word){
+    score = word.length;
+    updateScore(socketID,score);
+    io.emit("updateScore",get_userInfo());
 }

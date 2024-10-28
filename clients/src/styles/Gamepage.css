@@ -20,18 +20,18 @@
     position: absolute;
     color: black;
     font-size: 24px;
-    animation: fall 5s linear forwards;
+    animation: fall 6s linear forwards;
 }
 
-/* Keyframes for falling animation */
+
 @keyframes fall {
     0% {
-        top: -50px;
+        top: 0vh;
         opacity: 1;
     }
     100% {
-        top: 100vh;
-        opacity: 0;
+        top: 75vh;
+        opacity: 1;
     }
 }
 

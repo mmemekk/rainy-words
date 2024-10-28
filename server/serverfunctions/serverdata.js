@@ -1,3 +1,5 @@
+const { io } = require("./socket");
+
 var userInfo = [];
 var count = 0;
 
@@ -12,6 +14,17 @@ exports.addUser = function(input,socket){
         count++;
         socket.emit("success_addUser")
     }
+}
+
+exports.updateScore = function(socketID,score){
+    const user = userInfo.find((user) => user.id === socketID);
+
+    if(user){
+        user.score+=score;
+    } else{
+        console.log(`user with ID ${socketID} not found`);
+    }
+
 }
 
 exports.removeUser = function(socketId,io){
