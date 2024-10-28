@@ -52,7 +52,7 @@ const Game = ()=>{
 
     return (
         <div className="game-container">
-            <button onClick={retoprevious}>RE</button>
+            <button>RE</button>
             <div className="topBar">
                 <p>Player1 Player2</p>
                 <div className='clock'>
