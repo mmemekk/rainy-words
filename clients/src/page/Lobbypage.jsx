@@ -7,26 +7,36 @@ import Button from "../components/Button";
 
 const Lobby = ()=>{
 
-    const[users,setUsers] = useState(["mekk","joe","kong","zara","jj"]);
     const navigate = useNavigate();
-
-    function handlePlayButtonClick(){
-        navigate('/gamepage');
-    }
+    const [userState, setUserState]=useState(socket.id);
+    const[users,setUsers] = useState(["mekk","joe","kong","zara","jj"]);
+    const[mode] = useState(["Beginner", "Intermediate", "Expert"])
+    const keys = 0;
+    const[modeDes] = useState(["100 words, 5 minutes", "200 words, 5 minutes", "300 words, 5 minutes"])
 
 
     useEffect(() => {
+
+        if(socket.id!==userState){
+            setUserState(socket.id);
+            navigate('/');
+        }
 
         socket.on("userList", (userNames)=>{ //NEED TO BE IMPLEMNTED IN SERVER
             setUsers(userNames);
         })
 
+        socket.on("gameStart",()=>{
+            navigate('/gamepage');
+        })
+
     })
 
 
-    const[mode] = useState(["Beginner", "Intermediate", "Expert"])
-    const keys = 0;
-    const[modeDes] = useState(["100 words, 5 minutes", "200 words, 5 minutes", "300 words, 5 minutes"])
+
+    function handlePlayButtonClick(){
+        navigate('/gamepage');
+    }
 
     // function goLeftClicked(){
     //     keys = (keys+1)%3;

@@ -8,12 +8,9 @@ import Button from "../components/Button";
 
 const Welcome =() =>{
 
-    const [userName, setUserName] = useState('');
     const navigate = useNavigate();
+    const [userName, setUserName] = useState('');
 
-    function handlePlayButtonClick(){
-        navigate('/lobby');
-    }
 
     useEffect(() => {
         socket.emit("getUserName", socket.id);
@@ -26,6 +23,12 @@ const Welcome =() =>{
         });
 
     }, []); 
+
+    function handlePlayButtonClick(){
+        navigate('/lobby');
+    }
+
+
 
     return (
         <> 

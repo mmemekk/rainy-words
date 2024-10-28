@@ -1,3 +1,5 @@
+const { io } = require("./socket");
+
 var userInfo = [];
 var count = 0;
 
@@ -7,6 +9,9 @@ exports.addUser = function(input,socket){
         console.log('user already existed!');
         socket.emit("fail_addUser")
 
+    } else if(userInfo.some(user=> user.id === socket.id)){
+        console.log('duplicated ID!');
+        socket.emit("fail_addUser");
     } else{
         userInfo.push({name:input,score:0,id:socket.id});
         count++;
@@ -14,13 +19,27 @@ exports.addUser = function(input,socket){
     }
 }
 
+exports.updateScore = function(socketID,score){
+    const user = userInfo.find((user) => user.id === socketID);
+
+    if(user){
+        user.score+=score;
+    } else{
+        console.log(`user with ID ${socketID} not found`);
+    }
+
+}
+
 exports.removeUser = function(socketId,io){
-    userInfo.forEach((user,index) =>{
-        if(user.id === socketId){
-            userInfo.splice(index,1);
-        }
-    })
-    count--;
+
+    if(count!==0){
+        userInfo.forEach((user,index) =>{
+            if(user.id === socketId){
+                userInfo.splice(index,1);
+            }
+        })
+        count--;
+    }
     io.emit("userRemoved",exports.get_userInfo()); //must check if info correct
 }
 

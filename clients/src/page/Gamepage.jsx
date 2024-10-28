@@ -7,69 +7,141 @@ import Button from "../components/Button";
 
 const Game = ()=>{
     const navigate = useNavigate();
+    const [userState, setUserState]=useState(socket.id);
     const [fallingWords, setFallingWords] = useState([]);
     const [answer, setAnswer] = useState('');
     const [timer, setTimer] = useState({ minute: 5, second: 0 }); // State for timer (5 minutes)
+    const [score,setScore] = useState([]);
 
     useEffect(() => {
 
+        // If socket.id is not defined, navigate to home and return early
+        if (!socket.id) {
+            navigate('/');
+            return;
+        }
+
+        if(socket.id!==userState){
+            setUserState(socket.id);
+            navigate('/');
+            return;
+        }
+
         socket.emit("startButton");
-        console.log("emit");
 
 
-        socket.on("newWord", (word) => {
+
+        socket.on("newWord", (word,position) => {
             console.log(word);
-            const randomPosition = Math.floor(Math.random() * (90 - 10 + 1)) + 10; // Random left position (10-90%)
-            setFallingWords((prevWords) => [
-                ...prevWords,
-                { text: word, position: randomPosition, id: Date.now() } // Use timestamp as a unique id
-            ]);
+            const randomPosition = position;
+
+            const newWord = {
+                text: word,
+                position: randomPosition,
+                id: Date.now(),
+            };
+
+            setFallingWords((prevWords) => [...prevWords, newWord]);
+
+            setTimeout(() => {
+                setFallingWords((prevWords) =>
+                    prevWords.filter((w) => w.text !== newWord.text) // Remove the word after the timer
+                );
+                // console.log("removeFallingword:");
+            }, 10000); 
+
         });
 
-        socket.on('counter', (time) => {
+        socket.on("counter", (time) => {
             setTimer(time); // Update the timer state with the received time
         });
 
+        socket.on("userInfo", (userInfo) =>{
+            setScore(userInfo);
+        })
+
+        socket.on("updateScore", (userInfo) =>{
+            setScore(userInfo);
+            console.log(userInfo);
+        })
+
         return () => {
+            socket.off("startButton");
             socket.off("newWord");
-            // socket.off('counter');
+            socket.off('counter');
+            socket.off("userInfo");
+            socket.off("updateScore");
+
         };
     }, []);
 
+
+    // useEffect(() => {
+    //     console.log("Updated fallingWords array:", fallingWords);
+    // }, [fallingWords]);
+
+
     function retoprevious(){
-        navigate('/lobbypage');
+        navigate('/');
     }
 
-    function submitWord(){
-        socket.emit("submitWord", answer);
-        setAnswer('');
-    }
+
     function handleInput(event){
         let { value } = event.target;
         setAnswer(value);
-      }
+    }
+
+    function submitWord(event){
+        event.preventDefault();
+        const wordExist = fallingWords.some(word => word.text === answer);
+        if(wordExist){
+            socket.emit("submitWord",answer);
+
+            setFallingWords((prevWords) => prevWords.filter((word) => word.text !== answer));
+
+        } else{
+            console.log("no word founded");
+        }
+        setAnswer('');
+
+    }
+
+    
 
 
     return (
         <div className="game-container">
             <button>RE</button>
             <div className="topBar">
-                <p>Player1 Player2</p>
+                <div className="scoreboard">
+                    {score.map((player, index) => (
+                        <p key={index}>
+                            {player.name}: {player.score}
+                        </p>
+                    ))}
+                </div>
                 <div className='clock'>
                     Timer: {timer.minute}:{timer.second < 10 ? `0${timer.second}` : timer.second}
                 </div>
                 <p>Plater3 Player4</p>
             </div>
 
-            <div className="inputContainer">
+            <form onSubmit={submitWord} className="inputContainer">
                 <input className="inputBox" placeholder="Type Here" onChange={handleInput} value={answer}></input>
-            </div>
-            <button onClick={submitWord}>DONE</button>
+                <button onClick={submitWord}>DONE</button>
+            </form>
+
 
 
             <div className="falling-words">
                 {fallingWords.map((word) => (
-                    <div key={word.id} className="falling-word" style={{ left: `${word.position}%` }}>{word.text}</div>
+                    <div 
+                        key={word.id} 
+                        className={"falling-word"} 
+                        style={{ left: `${word.position}%` }}
+                    >
+                        {word.text}
+                    </div>
                 ))}
             </div>
 

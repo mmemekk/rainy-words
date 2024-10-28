@@ -1,6 +1,7 @@
 const { io } = require('./socket.js');
 const {sendingWord} = require('./randomword.js');
 
+
 const fixedTime = 300; // Set default timer (e.g., 300 seconds)
 let timerInterval = null; // To store the interval ID
 let timer = fixedTime; // Start with the default fixedTime
@@ -36,17 +37,35 @@ exports.trackTime = function (socket) {
         } else {
 
             clearInterval(timerInterval); // Stop the timer when it reaches 0
+            timerInterval=null;
             io.emit('timesUp'); // Notify all clients that time's up
         }
     }, 1000);
 
 
-    socket.on('resetTimer', () => { //NOT INVOLVE IN THE PROJECT
-        clearInterval(timerInterval); // Stop the current interval
-        timerInterval = null; // Reset interval ID
-        timer = fixedTime; // Reset the timer to fixedTime
-        minute = Math.floor(timer / 60);
-        second = timer % 60;
-        io.emit('counter', { minute, second }); // Emit reset time to all clients
+    socket.on('resetTimer', () => {
+        // clearInterval(timerInterval); // Stop the current interval
+        // timerInterval = null; // Reset interval ID
+        // timer = fixedTime; // Reset the timer to fixedTime
+        // minute = Math.floor(timer / 60);
+        // second = timer % 60;
+        // io.emit('counter', { minute, second }); // Emit reset time to all clients
+        exports.resetTimer();
     });
 };
+
+exports.resetTimer = function(){
+    clearInterval(timerInterval); // Stop the current interval
+    timerInterval = null; // Reset interval ID
+    timer = fixedTime; // Reset the timer to fixedTime
+    minute = Math.floor(timer / 60);
+    second = timer % 60;
+    io.emit('counter', { minute, second }); // Emit reset time to all clients
+    console.log(("reset timer is called"));
+
+}
+
+
+exports.isGameRunning = function(){
+    return timerInterval !== null;
+}

@@ -44,11 +44,15 @@ exports.getRandomWord = function(){
     return rndWord;
 }
 
+exports.getRandomPosition = function(){
+    const randomPosition = Math.floor(Math.random() * (90 - 10 + 1)) + 10; // Random left position (10-90%)
+    return randomPosition;
+}
 exports.sendingWord = function(){
-    console.log("sending word")
     const word = exports.getRandomWord();
-    console.log(word);
-    io.emit("newWord",word);
+    const position = exports.getRandomPosition();
+    console.log(word,position);
+    io.emit("newWord",word,position);
 }
 
 
