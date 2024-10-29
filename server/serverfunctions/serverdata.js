@@ -52,6 +52,10 @@ exports.get_nameFromId = function(socketId){
     return null;
 }
 
+exports.get_result = function(){
+    return [...userInfo].sort((a, b) => b.score - a.score); //send in descending order
+}
+
 exports.get_userInfo = function(){
     return userInfo;
 }

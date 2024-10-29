@@ -29,8 +29,6 @@ const Game = ()=>{
 
         socket.emit("startButton");
 
-
-
         socket.on("newWord", (word,position) => {
             console.log(word);
             const randomPosition = position;
@@ -63,6 +61,10 @@ const Game = ()=>{
         socket.on("updateScore", (userInfo) =>{
             setScore(userInfo);
             console.log(userInfo);
+        })
+
+        socket.on("timesUp",() =>{
+            navigate('/result');
         })
 
         return () => {

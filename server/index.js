@@ -1,5 +1,5 @@
 const { io, httpServer } = require('./serverfunctions/socket.js');
-const { addUser, removeUser, get_userInfo, get_nameFromId, get_count  } = require('./serverfunctions/serverdata.js');
+const { addUser, removeUser, get_userInfo, get_nameFromId, get_count, get_result} = require('./serverfunctions/serverdata.js');
 const { sendMessage } = require('./serverfunctions/chatmessage.js');
 const {setgameMode} = require('./serverfunctions/randomword.js')
 const { trackTime, resetTimer,isGameRunning } = require('./serverfunctions/timer.js'); 
@@ -34,8 +34,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on("submitWord" , (word) =>{
-        console.log("received worddddd:",word);
+        console.log("Received Word:",word);
         calculateScore(socket.id,word);
+    })
+
+    socket.on("requestResult",() =>{
+        io.emit("gameResult",get_result());
     })
 
     socket.on('disconnect', () => {
@@ -44,7 +48,7 @@ io.on('connection', (socket) => {
         console.log(get_userInfo());
         io.emit("userInfo",get_userInfo());
 
-        if(isGameRunning() && (get_count()===0)){
+        if(isGameRunning() && (get_count()===0)){ //if no user left while playing, stop reset the game
             resetTimer();
         }
     });

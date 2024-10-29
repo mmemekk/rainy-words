@@ -2,7 +2,7 @@ const { io } = require('./socket.js');
 const {sendingWord} = require('./randomword.js');
 
 
-const fixedTime = 300; // Set default timer (e.g., 300 seconds)
+const fixedTime = 10; // Set default timer (e.g., 300 seconds)
 let timerInterval = null; // To store the interval ID
 let timer = fixedTime; // Start with the default fixedTime
 
@@ -44,12 +44,6 @@ exports.trackTime = function (socket) {
 
 
     socket.on('resetTimer', () => {
-        // clearInterval(timerInterval); // Stop the current interval
-        // timerInterval = null; // Reset interval ID
-        // timer = fixedTime; // Reset the timer to fixedTime
-        // minute = Math.floor(timer / 60);
-        // second = timer % 60;
-        // io.emit('counter', { minute, second }); // Emit reset time to all clients
         exports.resetTimer();
     });
 };
@@ -61,8 +55,6 @@ exports.resetTimer = function(){
     minute = Math.floor(timer / 60);
     second = timer % 60;
     io.emit('counter', { minute, second }); // Emit reset time to all clients
-    console.log(("reset timer is called"));
-
 }
 
 
