@@ -1,39 +1,158 @@
-.userListContainer {
-    width: 468px;
-    height: 75vh;
-    background-color: #87BDCF; /* Semi-transparent background color */
-    border-radius: 30px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow effect */
-    padding-top: 3%;
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-bottom: 3%;
-    display: grid; /* Flexbox for vertical alignment */
-    justify-content: center; /* Center items vertically */
-    margin: 2%;
-    margin-top: 5%;
-}
-.Player{
-    text-align: center;
-    color: #fff;
-    justify-content: center;
+.lobbybg{
+    background-color: #E3EDEB;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh;
     margin: 0;
-    font-size: 48px;
+    padding: 0;
 }
+.userListContainer {
+    width: 32vw;
+    height: 77vh;
+    background-color: #87BDCF;
+    border-radius: 30px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow effect */
+    padding: 2%;
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items vertically */
+    margin:3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+}
+
 .userItem {
-    padding-top: 10%;
-    padding-bottom: 10%;
-    color: #9B9B9B; /* Text color for user names */
-    text-align: center; /* Center the text */
+
+    color: #000000; 
+    font-family: "SuperMario256";
+    text-align: center; 
+    font-size: 35px;
+    background-color: #306a0e;
+    border-radius: 32px;
+    width: 30vw;
+    height: 9vh;
+    display: flex; /* Make each item a flex container */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: auto;
+}
+
+
+.Player{
+    font-family: "SuperMario256";
+    color: #fff;
+    font-size: 48px;
+    position: absolute;
+    top:11%;
+    left:21.5%;
+    transform: translate(-50%,-50%);
+
+}
+
+.user1{
+    color: #000000; 
+    font-family: "SuperMario256";
     font-size: 35px;
     background-color: #ADD2DE;
     border-radius: 32px;
     width: 30vw;
-    height: 2vh;
-    margin: 10px;
-    justify-content: center;
+    height: 9vh;
+    display: flex; /* Make each item a flex container */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    position:absolute;
+    top:27%;
+    left:21%;
+    transform: translate(-50%,-50%);
+    line-height: 40px;
 }
-
+.user2{
+    color: #000000; 
+    font-family: "SuperMario256";
+    font-size: 35px;
+    background-color: #ADD2DE;
+    border-radius: 32px;
+    width: 30vw;
+    height: 9vh;
+    display: flex; /* Make each item a flex container */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    position:absolute;
+    top:38.5%;
+    left:21%;
+    transform: translate(-50%,-50%);
+}
+.user3{
+    color: #000000; 
+    font-family: "SuperMario256";
+    font-size: 35px;
+    background-color: #ADD2DE;
+    border-radius: 32px;
+    width: 30vw;
+    height: 9vh;
+    display: flex; /* Make each item a flex container */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    position:absolute;
+    top:50%;
+    left:21%;
+    transform: translate(-50%,-50%);
+}
+.user4{
+    color: #000000; 
+    font-family: "SuperMario256";
+    font-size: 35px;
+    background-color: #ADD2DE;
+    border-radius: 32px;
+    width: 30vw;
+    height: 9vh;
+    display: flex; /* Make each item a flex container */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    position:absolute;
+    top:61.5%;
+    left:21%;
+    transform: translate(-50%,-50%);
+}
+.user5{
+    color: #000000; 
+    font-family: "SuperMario256";
+    font-size: 35px;
+    background-color: #ADD2DE;
+    border-radius: 32px;
+    width: 30vw;
+    height: 9vh;
+    display: flex; /* Make each item a flex container */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    position:absolute;
+    top:73%;
+    left:21%;
+    transform: translate(-50%,-50%);
+}
+.user6{
+    color: #000000; 
+    font-family: "SuperMario256";
+    font-size: 35px;
+    background-color: #ADD2DE;
+    border-radius: 32px;
+    width: 30vw;
+    height: 9vh;
+    display: flex; /* Make each item a flex container */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    position:absolute;
+    top:84.5%;
+    left:21%;
+    transform: translate(-50%,-50%);
+}
 .userItem:last-child {
     border-bottom: none; /* Remove border for the last item */
 }
