@@ -8,6 +8,7 @@ import Home from "./page/Homepage.jsx"
 import Welcome from "./page/Welcomepage.jsx"
 import Lobby from "./page/Lobbypage.jsx"
 import Game from "./page/Gamepage.jsx"
+import Result from "./page/Resultpage.jsx"
 
 function App() {
 
@@ -15,10 +16,12 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/welcome" element={<Welcome/>} />
           <Route path="/lobby" element={<Lobby/>} />
-          <Route path="/gamepage" element={<Game/>} />
+          <Route path="/game" element={<Game/>} />
+          <Route path="/result" element={<Result/>} />
 
         </Routes>
       </div>

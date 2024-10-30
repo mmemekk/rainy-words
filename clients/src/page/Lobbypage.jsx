@@ -27,7 +27,7 @@ const Lobby = ()=>{
         })
 
         socket.on("gameStart",()=>{
-            navigate('/gamepage');
+            navigate('/game');
         })
 
     })
@@ -35,7 +35,7 @@ const Lobby = ()=>{
 
 
     function handlePlayButtonClick(){
-        navigate('/gamepage');
+        navigate('/game');
     }
 
     // function goLeftClicked(){
