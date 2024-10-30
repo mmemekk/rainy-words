@@ -48,7 +48,7 @@ const Game = ()=>{
                     prevWords.filter((w) => w.text !== newWord.text) // Remove the word after the timer
                 );
                 // console.log("removeFallingword:");
-            }, 10000); 
+            }, 10000);
 
         });
 
@@ -106,12 +106,12 @@ const Game = ()=>{
 
     }
 
-    
+
 
 
     return (
         <div className="game-container">
-            <button>RE</button>
+            <button s>RE</button>
             <div className="topBar">
                 <div className="scoreboard">
                     {score.map((player, index) => (
@@ -123,21 +123,20 @@ const Game = ()=>{
                 <div className='clock'>
                     Timer: {timer.minute}:{timer.second < 10 ? `0${timer.second}` : timer.second}
                 </div>
-                <p>Plater3 Player4</p>
             </div>
 
             <form onSubmit={submitWord} className="inputContainer">
-                <input className="inputBox" placeholder="Type Here" onChange={handleInput} value={answer}></input>
-                <button onClick={submitWord}>DONE</button>
+                <input className="inputBox" placeholder="Type Here ..." onChange={handleInput} value={answer}></input>
+                <button className='pauseButton'>||</button>
             </form>
 
 
 
             <div className="falling-words">
                 {fallingWords.map((word) => (
-                    <div 
-                        key={word.id} 
-                        className={"falling-word"} 
+                    <div
+                        key={word.id}
+                        className={"falling-word"}
                         style={{ left: `${word.position}%` }}
                     >
                         {word.text}

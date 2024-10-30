@@ -1,5 +1,5 @@
 .game-container {
-    overflow: hidden;
+    overflow: auto;
     height: 100vh;
     background-color: #f0f0f0;
     background-image: url("../../public/Netcentric.jpg");
@@ -18,7 +18,7 @@
 
 .falling-word {
     position: absolute;
-    color: black;
+    color: #fff;
     font-size: 24px;
     animation: fall 10s linear forwards;
 }
@@ -52,6 +52,36 @@
     margin: auto;
     margin-top: 2%;
     height: 78px;
-    overflow: hidden;
+    overflow: auto;
 }
 
+.inputContainer{
+    display: flex;
+}
+
+.inputBox{
+    margin: auto;
+    width: 930px;
+    height: 75px;
+    border-radius: 32px;
+    border-width: 0px;
+    padding-left: 2%;
+    background-color: #D9D9D9;
+    text-align: left;
+    overflow: auto;
+    position: fixed;
+    top: 80vh;
+    left: 5vw;
+}
+
+.inputBox::placeholder{
+    font-family: "SuperMario256";
+    font-size: 28px;
+    color: #fff;
+}
+
+.clock{
+    font-family: "SuperMario256";
+    color: #FF0000;
+    margin-top: 2%;
+}
