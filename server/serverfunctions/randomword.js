@@ -26,7 +26,7 @@ exports.getWordLength = function(mode){
 
 
 exports.getRandomWord = function(){
-    let wordLength = exports.getWordLength("hard");
+    let wordLength = exports.getWordLength(gameMode);
     console.log("this wordlength", wordLength);
     let availableWord = wordList[wordLength].filter(word => !usedWords[wordLength].includes(word));  //array of available word
 

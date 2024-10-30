@@ -22,9 +22,18 @@ io.on('connection', (socket) => {
         sendMessage(message, socket);
     });
 
+    socket.on("requestUserInfo",() =>{
+        io.emit("userInfo",get_userInfo());
+        console.log("send user info");
+    } )
+
     socket.on("gameMode", (mode) => {
         setgameMode(mode);
     });
+
+    socket.on("setKeys", (keys) => {
+        io.emit("setKeys",keys);
+    })
     
     socket.on("startButton", () => {
         console.log("start Button");
@@ -33,14 +42,15 @@ io.on('connection', (socket) => {
         io.emit("userInfo",get_userInfo());
     });
 
+
     socket.on("submitWord" , (word) =>{
         console.log("Received Word:",word);
         calculateScore(socket.id,word);
-    })
+    });
 
     socket.on("requestResult",() =>{
         io.emit("gameResult",get_result());
-    })
+    });
 
     socket.on('disconnect', () => {
         console.log('User disconnected');

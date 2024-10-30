@@ -24,11 +24,14 @@ exports.hardMode = function(rnd){
 }
 
 exports.selectMode = function(mode){
-    if(mode === "easy"){
+    if(mode === "beginner"){
+        console.log("Beginner mode is selected");
         return exports.easyMode;
-    } else if (mode === "medium"){
+    } else if (mode === "intermediate"){
+        console.log("Intermediate mode is selected");
         return exports.mediumMode;
     } else{
+        console.log("Expert mode is selected");
         return exports.hardMode;
     }
 }

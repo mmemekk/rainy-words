@@ -9,42 +9,70 @@ const Lobby = ()=>{
 
     const navigate = useNavigate();
     const [userState, setUserState]=useState(socket.id);
-    const[users,setUsers] = useState(["mekk","joe","kong","zara","jj"]);
-    const[mode] = useState(["Beginner", "Intermediate", "Expert"])
-    const keys = 0;
-    const[modeDes] = useState(["100 words, 5 minutes", "200 words, 5 minutes", "300 words, 5 minutes"])
-
+    const [users,setUsers] = useState([]);
+    const [keys, setKeys] = useState(0);
+    const mode = ["beginner", "intermediate", "expert"];
+    const modeDes = ["100 words, 5 minutes", "200 words, 5 minutes", "300 words, 5 minutes"];
 
     useEffect(() => {
+
+        if (!socket.id) {
+            navigate('/');
+            return;
+        }
 
         if(socket.id!==userState){
             setUserState(socket.id);
             navigate('/');
         }
 
-        socket.on("userList", (userNames)=>{ //NEED TO BE IMPLEMNTED IN SERVER
-            setUsers(userNames);
+        socket.emit("requestUserInfo");
+
+        socket.on("userInfo", (userInfo)=>{ 
+            setUsers(userInfo.map(item => item.name));
+
+        })
+
+        socket.on("setKeys",(keys) =>{
+            setKeys(keys);
         })
 
         socket.on("gameStart",()=>{
             navigate('/game');
         })
 
-    })
+        
+        return () => {
+            socket.off("requestUserInfo");
+            socket.off("userInfo");
+
+        };
+
+    },[]);
 
 
+    function goLeftClicked(){
+        setKeys((prevKeys) => {
+            const newKeys = (prevKeys - 1 + mode.length) % mode.length;
+            socket.emit("setKeys", newKeys); 
+            return newKeys;
+        });
+    }
+    
+    function goRightClicked(){
+        setKeys((prevKeys) => {
+            const newKeys = (prevKeys + 1) % mode.length;
+            socket.emit("setKeys", newKeys); 
+            return newKeys;
+        });
+    }
 
     function handlePlayButtonClick(){
+        socket.emit("gameMode", mode[keys]);
         navigate('/game');
     }
 
-    // function goLeftClicked(){
-    //     keys = (keys+1)%3;
-    // }
 
-    // function goRightClicked(){
-    //     keys = (keys-1)%3;
-    // }
 
     return (
         <div className="lobbybg">
@@ -62,15 +90,23 @@ const Lobby = ()=>{
             </div>
             <div className='chooseModeWin'><p className='ChooseMode'> Choose your mode</p>
                 <div className='modeWinContent'>
-                    <button className='goLeft' ><p className='goLeftButt'>&lt;</p></button>
-                    <div className='modewin'><p className='Mode'>{mode[keys]}</p>
+                    <button className='goLeft' onClick={goLeftClicked} >
+                        <p className='goLeftButt'>&lt;</p>
+                    </button>
+
+                    <div className='modewin'>
+                        <p className='Mode'>{mode[keys]}</p>
                     </div>
-                    <button className='goRight'><p className='goRightButt'>&gt;</p></button>
+
+                    <button className='goRight' onClick={goRightClicked}>
+                        <p className='goRightButt'>&gt;</p>
+                    </button>
+
                 </div>
                 <div className='ModeDes'>{modeDes[keys]}</div>
                 <div className='playButton'> 
                     <button className='Play' onClick={handlePlayButtonClick}><p className='Playtext'>Play</p></button>
-                    </div>
+                </div>
             </div>
             <div><button className='Chatbox'>Chat</button></div>
         </div>

@@ -27,12 +27,8 @@ const Result = ()=>{
         socket.emit("requestResult");
 
         socket.on("gameResult", (result) =>{
-            console.log(result);
-
+            console.log("This is result:", result);
         })
-
-
-
 
 
         return () => {
