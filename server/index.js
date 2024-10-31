@@ -3,7 +3,6 @@ const { addUser, removeUser, get_userInfo, get_nameFromId, get_count, get_result
 const { sendMessage } = require('./serverfunctions/chatmessage.js');
 const {setgameMode} = require('./serverfunctions/randomword.js')
 const { trackTime, resetTimer,isGameRunning } = require('./serverfunctions/timer.js'); 
-const {sendingWord} = require('./serverfunctions/randomword');
 const { calculateScore } = require('./serverfunctions/scoring.js');
 
 io.on('connection', (socket) => {
