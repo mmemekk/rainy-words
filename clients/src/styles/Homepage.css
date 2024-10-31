@@ -45,7 +45,11 @@ svg {
   font-size: 30px; /* Set font size */
   font-family: 'SuperMario256'; /* Use the custom font */
 
-  text-shadow: 2.5px 2px 3px rgb(255, 255, 255); 
+  text-shadow:
+  2px 2px 0 #ffff,
+  -2px 2px 0 #ffffff,
+  2px -2px 0 #ffffff,
+  -2px -2px 0 #ffffff;
 }
 
 

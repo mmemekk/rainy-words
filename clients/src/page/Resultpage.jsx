@@ -8,6 +8,7 @@ import Button from "../components/Button";
 const Result = ()=>{
     const navigate = useNavigate();
     const [userState, setUserState]=useState(socket.id);
+    const [userResult, setUserResult] = useState(socket.id);
 
 
     useEffect(() => {
@@ -28,8 +29,10 @@ const Result = ()=>{
 
         socket.on("gameResult", (result) =>{
             console.log("This is result:", result);
+            // setUserResult(result.map(item => {item.name,item.score}));
+            setUserResult(result.map(item => [item.name, item.score]));
+            console.log("This is result:", userResult);
         })
-
 
         return () => {
             socket.off("requestResult");
@@ -38,20 +41,21 @@ const Result = ()=>{
         };
     }, []);
 
-
-
-    
-
-
     return (
-        <div className="result-container">
-
-
-
+        <div className='background'>
+            <div className='Text-scoreboard'>
+                <p className='textscore'>Score Board</p>
+            </div>
+            <div className="result-container">
+                <ul class="result-list">
+                    {userResult.map((user, index) => (
+                        <li key={index}>{user}</li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
- 
+
 }
 
 export default Result;
-
