@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import io from 'socket.io-client';
 import { useEffect, useState } from 'react';
 
@@ -16,7 +17,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <Router>
+    <BrowserRouter>
       <div className="App">
         <Routes>
 
@@ -29,7 +30,7 @@ function App() {
           <Route path='/admin' element={<Admin/>} />
         </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

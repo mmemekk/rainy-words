@@ -16,9 +16,11 @@ const io = new Server(httpServer,{
 
 app.use(express.static(path.join(__dirname, '../../clients/dist'))); 
 
-app.get('/', (req, res) => {
+//fix hered
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../clients/dist/index.html'));
 });
+
 
 // app.use(express.static(path.join(__dirname, '../clientforservertesting/build'))); // Adjust the path based on your structure
 
