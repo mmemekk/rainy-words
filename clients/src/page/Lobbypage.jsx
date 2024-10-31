@@ -2,15 +2,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Lobbypage.css';
 import { socket } from "../utils/socket.jsx";
-import Input from "../components/Input";
-import Button from "../components/Button";
 
 const Lobby = () => {
 
     const navigate = useNavigate();
     const [userState, setUserState] = useState(socket.id);
-    // const [users,setUsers] = useState([]);
-    const [users, setUsers] = useState(["mekk", "jj", "aom", "frank", "pam", "deejay"]);
+    const [users, setUsers] = useState([]);
     const [keys, setKeys] = useState(0);
     const mode = ["beginner", "intermediate", "expert"];
     const modeDes = ["100 words, 5 minutes", "200 words, 5 minutes", "300 words, 5 minutes"];
@@ -27,7 +24,12 @@ const Lobby = () => {
             navigate('/');
         }
 
-        // socket.emit("requestUserInfo");
+        socket.on("returnHome", () =>{
+            navigate('/');
+          })
+
+        socket.emit("requestUserInfo");
+        
 
         socket.on("userInfo", (userInfo) => {
             setUsers(userInfo.map(item => item.name));

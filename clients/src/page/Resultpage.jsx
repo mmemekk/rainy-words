@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Resultpage.css';
 import {socket} from "../utils/socket.jsx";
-import Input from "../components/Input";
-import Button from "../components/Button";
 
 const Result = ()=>{
     const navigate = useNavigate();
@@ -25,14 +23,18 @@ const Result = ()=>{
             return;
         }
 
+        socket.on("returnHome", () =>{
+            navigate('/');
+          })
+
         socket.emit("requestResult");
 
-        socket.on("gameResult", (result) =>{
-            console.log("This is result:", result);
-            // setUserResult(result.map(item => {item.name,item.score}));
-            setUserResult(result.map(item => [item.name, item.score]));
-            console.log("This is result:", userResult);
-        })
+        // socket.on("gameResult", (result) =>{
+        //     console.log("This is result:", result);
+        //     // setUserResult(result.map(item => {item.name,item.score}));
+        //     setUserResult(result.map(item => [item.name, item.score]));
+        //     console.log("This is result:", userResult);
+        // })
 
         return () => {
             socket.off("requestResult");
@@ -47,11 +49,11 @@ const Result = ()=>{
                 <p className='textscore'>Score Board</p>
             </div>
             <div className="result-container">
-                <ul class="result-list">
+                {/* <ul class="result-list">
                     {userResult.map((user, index) => (
                         <li key={index}>{user}</li>
                     ))}
-                </ul>
+                </ul> */}
             </div>
         </div>
     );

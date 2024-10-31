@@ -27,6 +27,10 @@ const Game = ()=>{
             return;
         }
 
+        socket.on("returnHome", () =>{
+            navigate('/');
+          })
+
         socket.emit("startButton");
 
         socket.on("newWord", (word,position) => {
@@ -46,7 +50,7 @@ const Game = ()=>{
                     prevWords.filter((w) => w.text !== newWord.text) // Remove the word after the timer
                 );
                 // console.log("removeFallingword:");
-            }, 10000);
+            }, 5000);
 
         });
 
@@ -113,23 +117,23 @@ const Game = ()=>{
 
     return (
         <div className="game-container">
-            <button s>RE</button>
             <div className="topBar">
                 <div className="scoreboard">
-                    {score.map((player, index) => (
-                        <p key={index}>
-                            {player.name}: {player.score}
-                        </p>
+                    {score.map((user, index) => (
+                        <div key={index} className={`player${index+1}`}>
+                            {user.name}:{user.score}
+                        </div>
                     ))}
                 </div>
+
+                
                 <div className='clock'>
-                    Timer: {timer.minute}:{timer.second < 10 ? `0${timer.second}` : timer.second}
+                    {timer.minute}:{timer.second < 10 ? `0${timer.second}` : timer.second}
                 </div>
             </div>
 
             <form onSubmit={submitWord} className="inputContainer">
                 <input className="inputBox" placeholder="Type Here ..." onChange={handleInput} value={answer}></input>
-                <button className='pauseButton'>||</button>
             </form>
 
 

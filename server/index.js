@@ -1,5 +1,5 @@
 const { io, httpServer } = require('./serverfunctions/socket.js');
-const { addUser, removeUser, get_userInfo, get_nameFromId, get_count, get_result} = require('./serverfunctions/serverdata.js');
+const { addUser, removeUser, get_userInfo, get_nameFromId, get_count, get_result,resetData} = require('./serverfunctions/serverdata.js');
 const { sendMessage } = require('./serverfunctions/chatmessage.js');
 const {setgameMode} = require('./serverfunctions/randomword.js')
 const { trackTime, resetTimer,isGameRunning } = require('./serverfunctions/timer.js'); 
@@ -51,6 +51,16 @@ io.on('connection', (socket) => {
         io.emit("gameResult",get_result());
     });
 
+    socket.on("resetSystem",()=>{
+        resetData();
+        if(isGameRunning()){
+            resetTimer();
+        }
+        io.emit("returnHome");
+        console.log("SYSTEM IS RESETED");
+        console.log(get_userInfo());
+    });
+
     socket.on('disconnect', () => {
         console.log('User disconnected');
         removeUser(socket.id, io);
@@ -63,12 +73,12 @@ io.on('connection', (socket) => {
     });
 });
 
-httpServer.listen(3000, () => {
-    console.log('Server running at http://localhost:3000');
-});
-
-// httpServer.listen(3000,'172.20.10.2', () => {
-//     console.log("Server is running at  http://172.20.10.2:3000");
+// httpServer.listen(3000, () => {
+//     console.log('Server running at http://localhost:3000');
 // });
+
+httpServer.listen(3000,'172.20.10.2', () => {
+    console.log("Server is running at  http://172.20.10.2:3000");
+});
 
 

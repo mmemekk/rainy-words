@@ -13,6 +13,10 @@ const Welcome = () => {
 
 
     useEffect(() => {
+        socket.on("returnHome", () =>{
+            navigate('/');
+          })
+
         socket.emit("getUserName", socket.id);
         socket.on("userName", (name) => {
             if (name === null) { //try to NAVIGATE back on REFRESH
@@ -21,6 +25,7 @@ const Welcome = () => {
                 setUserName(name);
             }
         });
+
 
     }, []);
 
@@ -36,17 +41,14 @@ const Welcome = () => {
                 <h className="welcomeText">Welcome</h>
                 <h className="nameText">{userName}</h>
 
-                    <img src='../../public/avatar1.png' className='gallery-image' />
+                    {/* <img src='../../public/avatar1.png' className='gallery-image' />
                     <img src='../../public/avatar2.png' className='gallery-image' />
                     <img src='../../public/avatar3.png' className='gallery-image' />
                     <img src='../../public/avatar4.png' className='gallery-image' />
                     <img src='../../public/avatar5.png' className='gallery-image' />
                     <img src='../../public/avatar6.png' className='gallery-image' />
                     <img src='../../public/avatar7.png' className='gallery-image' />
-                    <img src='../../public/avatar8.png' className='gallery-image' />
-
-
-
+                    <img src='../../public/avatar8.png' className='gallery-image' /> */}
 
 
                 <Button className="btnPlay" placeHolder='play' onClick={handlePlayButtonClick} />

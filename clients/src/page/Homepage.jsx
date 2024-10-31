@@ -18,6 +18,10 @@ const Home = () => {
 
   useEffect(() => {
 
+    socket.on("returnHome", () =>{
+      navigate('/');
+    })
+
     addUser();
     errorUser();
 

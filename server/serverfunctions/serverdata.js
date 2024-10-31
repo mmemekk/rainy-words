@@ -43,6 +43,11 @@ exports.removeUser = function(socketId,io){
     io.emit("userRemoved",exports.get_userInfo()); //must check if info correct
 }
 
+exports.resetData = function(){
+    userInfo=[];
+    count=0;
+}
+
 exports.get_nameFromId = function(socketId){
     for(const user of userInfo){
         if(user.id === socketId){
