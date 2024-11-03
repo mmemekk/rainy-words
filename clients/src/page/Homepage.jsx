@@ -11,7 +11,6 @@ export let userName = '';
 const Home = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
-  const [isVisible, setIsVisible] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
   const [noInputMessage, setNoInputMessage] = useState(false);
 
@@ -46,7 +45,6 @@ const Home = () => {
 
   function addUser() {
     socket.on("success_addUser", () => {
-      setIsVisible(true);
       navigate('/welcome');
     })
   }

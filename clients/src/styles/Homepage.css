@@ -44,7 +44,7 @@ svg {
   fill: #245666; /* Text color */
   font-size: 30px; /* Set font size */
   font-family: 'SuperMario256'; /* Use the custom font */
-
+  letter-spacing: 2px;
   text-shadow:
   2px 2px 0 #ffff,
   -2px 2px 0 #ffffff,
@@ -74,6 +74,7 @@ svg {
   color: #245666;
   font-size: 3.5vw;
   opacity: 65%;
+  letter-spacing: 3px;
 }
 
 .btnNext {

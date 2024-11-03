@@ -61,6 +61,12 @@ io.on('connection', (socket) => {
         console.log(get_userInfo());
     });
 
+    socket.on("removeUser",()=>{
+        removeUser(socket.id, io);
+        io.emit("userInfo",get_userInfo());
+        console.log("removed user", get_userInfo());
+    });
+
     socket.on('disconnect', () => {
         console.log('User disconnected');
         removeUser(socket.id, io);
@@ -73,12 +79,12 @@ io.on('connection', (socket) => {
     });
 });
 
-// httpServer.listen(3000, () => {
-//     console.log('Server running at http://localhost:3000');
-// });
-
-httpServer.listen(3000,'172.20.10.2', () => {
-    console.log("Server is running at  http://172.20.10.2:3000");
+httpServer.listen(3000, () => {
+    console.log('Server running at http://localhost:3000');
 });
+
+// httpServer.listen(3000,'172.20.10.2', () => {
+//     console.log("Server is running at  http://172.20.10.2:3000");
+// });
 
 

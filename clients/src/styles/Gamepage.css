@@ -101,7 +101,6 @@
 
 .falling-words {
     pointer-events: none;
-    font-size: 64px;
     text-align: center;
     justify-content: center;
     position: relative;
@@ -111,10 +110,11 @@
 
 .falling-word {
     font-family: "SuperMario256";
-    font-size: 28px;
+    font-size: 4vh;
+    letter-spacing: 2px ;
+    -webkit-text-stroke: 1px white;
     position: absolute;
     color: rgb(0, 0, 0);
-    font-size: 24px;
     animation: fall 5s linear forwards;
 }
 

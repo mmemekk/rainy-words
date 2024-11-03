@@ -17,14 +17,28 @@ const Welcome = () => {
             navigate('/');
           })
 
-        socket.emit("getUserName", socket.id);
-        socket.on("userName", (name) => {
-            if (name === null) { //try to NAVIGATE back on REFRESH
-                navigate('/');
-            } else {
-                setUserName(name);
+        // socket.emit("getUserName", socket.id);
+        // socket.on("userName", (name) => {
+        //     if (name === null) { //try to NAVIGATE back on REFRESH
+        //         navigate('/');
+        //     } else {
+        //         setUserName(name);
+        //     }
+        // });
+
+        socket.emit("requestUserInfo");
+
+        socket.on("userInfo", (userInfo) => {
+            for(const user of userInfo){
+                if(user.id === socket.id){
+                    setUserName(user.name);
+                    return;
+                }
             }
-        });
+
+            setUserName("USER NOT FOUNDED");
+
+        })
 
 
     }, []);
