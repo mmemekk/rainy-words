@@ -2,7 +2,7 @@ const { io, httpServer } = require('./serverfunctions/socket.js');
 const { addUser, removeUser, get_userInfo, get_nameFromId, get_count, get_result,resetData} = require('./serverfunctions/serverdata.js');
 const { sendMessage } = require('./serverfunctions/chatmessage.js');
 const {setgameMode} = require('./serverfunctions/randomword.js')
-const { trackTime, resetTimer,isGameRunning } = require('./serverfunctions/timer.js'); 
+const { trackTime, resetTimer,isGameRunning } = require('./serverfunctions/timer.js');
 const { calculateScore } = require('./serverfunctions/scoring.js');
 
 io.on('connection', (socket) => {
@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
     socket.on("setKeys", (keys) => {
         io.emit("setKeys",keys);
     })
-    
+
     socket.on("startButton", () => {
         console.log("start Button");
         trackTime(socket);
@@ -80,5 +80,3 @@ io.on('connection', (socket) => {
 httpServer.listen(3000,'172.20.10.2', () => {
     console.log("Server is running at  http://172.20.10.2:3000");
 });
-
-
