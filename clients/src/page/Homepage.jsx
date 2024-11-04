@@ -1,13 +1,11 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Homepage.css';
 import { socket } from "../utils/socket.jsx";
-import Input from "../components/Input";
-import Button from "../components/Button";
-
 
 export let userName = '';
+
 const Home = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
@@ -34,13 +32,20 @@ const Home = () => {
   function handleNextButtonClick(event) {
     event.preventDefault();
 
-    if (name === '') {
-      setNoInputMessage(true);
-    } else {
-      socket.emit('addUser', name);
-      userName = name;
-      setName('');
-    }
+    const clickAudio = new Audio("/click.mp3");
+    const messageAudio = new Audio("/message.mp3");
+    clickAudio.play();
+
+    setTimeout(() => { // just want messageAudio to play after Click Audio
+      if (name === '') {
+          messageAudio.play();  
+          setNoInputMessage(true);
+      } else {
+          socket.emit('addUser', name.trim());
+          // userName = name;
+          setName('');
+      }
+  }, 350);
   };
 
   function addUser() {
@@ -51,21 +56,28 @@ const Home = () => {
 
   function errorUser() {
     socket.on("fail_addUser", () => {
+      const messageAudio = new Audio("/message.mp3");
+      messageAudio.play();  
       setErrorMessage(true);
     })
   }
 
   function closeErrorMessage() {
+    const clickAudio = new Audio("/click.mp3");
+    clickAudio.play();  
     setErrorMessage(false);
   }
 
   function closeNoInputMessage() {
+    const clickAudio = new Audio("/click.mp3");
+    clickAudio.play();  
     setNoInputMessage(false);
   }
 
   return (
     <>
       <div className='homebg'>
+        
         <svg viewBox="0 0 500 200">
           <path id="curve" className="path" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" />
           <text width="500" className="curvedText">
@@ -78,7 +90,7 @@ const Home = () => {
           <input
             type="text"
             className="inputName"
-            placeHolder="Enter your name"
+            placeholder="Enter your name"
             onChange={handleInput}
             value={name}
           />

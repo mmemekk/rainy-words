@@ -17,14 +17,14 @@ const Welcome = () => {
             navigate('/');
           })
 
-        // socket.emit("getUserName", socket.id);
-        // socket.on("userName", (name) => {
-        //     if (name === null) { //try to NAVIGATE back on REFRESH
-        //         navigate('/');
-        //     } else {
-        //         setUserName(name);
-        //     }
-        // });
+        socket.emit("getUserName", socket.id);
+        socket.on("userName", (name) => {
+            if (name === null) { //try to NAVIGATE back on REFRESH
+                navigate('/');
+            } else {
+                setUserName(name);
+            }
+        });
 
         socket.emit("requestUserInfo");
 
@@ -44,6 +44,8 @@ const Welcome = () => {
     }, []);
 
     function handlePlayButtonClick() {
+        const clickAudio = new Audio("/click.mp3");
+        clickAudio.play();  
         navigate('/lobby');
     }
 

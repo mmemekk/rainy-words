@@ -14,6 +14,7 @@ const Lobby = () => {
     const [messages, setMessages] = useState([]);
     const mode = ["beginner", "intermediate", "expert"];
     const modeDes = ["100 words, 5 minutes", "200 words, 5 minutes", "300 words, 5 minutes"];
+    const clickAudio = new Audio("click.mp3");
 
     useEffect(() => {
 
@@ -70,6 +71,7 @@ const Lobby = () => {
       };
 
     function goLeftClicked() {
+        clickAudio.play();
         setKeys((prevKeys) => {
             const newKeys = (prevKeys - 1 + mode.length) % mode.length;
             socket.emit("setKeys", newKeys);
@@ -78,6 +80,7 @@ const Lobby = () => {
     }
 
     function goRightClicked() {
+        clickAudio.play();
         setKeys((prevKeys) => {
             const newKeys = (prevKeys + 1) % mode.length;
             socket.emit("setKeys", newKeys);
@@ -86,8 +89,19 @@ const Lobby = () => {
     }
 
     function handlePlayButtonClick() {
+        clickAudio.play();
         socket.emit("gameMode", mode[keys]);
         navigate('/game');
+    }
+
+    function handleChatButtonClick(){
+        clickAudio.play();
+        setIsChatOpen(true);
+    }
+
+    function handleCloseButtionClick(){
+        clickAudio.play();
+        setIsChatOpen(false);
     }
 
     useEffect(() => {
@@ -134,12 +148,12 @@ const Lobby = () => {
                 </div>
             </div>
 
-            <button className="Chatbox" onClick={() => setIsChatOpen(true)}>Chat</button>
+            <button className="Chatbox" onClick={handleChatButtonClick}>Chat</button>
 
             {isChatOpen && (
                 <>
                     <div className="chat-overlay">
-                        <button className="close-chat" onClick={() => setIsChatOpen(false)}>X</button>
+                        <button className="close-chat" onClick={handleCloseButtionClick}>X</button>
                         <div className="chat-messages">
                             {messages.map((data, index) => (
                                 <div key={index} className="chat-message">{data.sender}: {data.message}</div>

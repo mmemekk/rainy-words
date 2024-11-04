@@ -85,14 +85,27 @@ svg {
   border-radius: 64px;
   font-family: "SuperMario256";
   font-size: 2.75vw;
-  border-width: 0px;
+  border: none;
   cursor: pointer;
   position: absolute;
   top: 63%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding-top: 10px;
+
 }
+
+.btnNext:hover {
+  background-color: #1e4a5c;
+
+}
+
+.btnNext:active {
+  background-color: #183e4a; 
+  transform: translate(-50%, -50%) scale(0.97); 
+}
+
+
 
 .errormessage {
   z-index: 9999;
@@ -138,5 +151,10 @@ svg {
 }
 
 .close-btn:hover {
-  color: #e9922e;
+  color: rgb(198, 28, 28);
+}
+
+.close-btn:active {
+  color: rgb(158, 21, 21);
+  transform: translate(-50%, -50%) scale(0.97); 
 }

@@ -13,6 +13,7 @@ const Game = ()=>{
     const [timer, setTimer] = useState({ minute: 5, second: 0 }); // State for timer (5 minutes)
     const [score,setScore] = useState([]);
 
+
     useEffect(() => {
 
         // If socket.id is not defined, navigate to home and return early
@@ -87,10 +88,6 @@ const Game = ()=>{
     // }, [fallingWords]);
 
 
-    function retoprevious(){
-        navigate('/');
-    }
-
 
     function handleInput(event){
         let { value } = event.target;
@@ -104,12 +101,16 @@ const Game = ()=>{
             socket.emit("submitWord",answer);
 
             setFallingWords((prevWords) => prevWords.filter((word) => word.text !== answer));
+            const correctAudio = new Audio("/correct.mp3");
+            correctAudio.play();
 
         } else{
             console.log("no word founded");
+            const wrongAudio = new Audio("/wrong.mp3");
+            wrongAudio.play();
         }
-        setAnswer('');
 
+        setAnswer('');
     }
 
 
