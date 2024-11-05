@@ -15,12 +15,24 @@ const Game = () => {
     const [preGame, setpreGame] = useState(true);
     const [startMsg, setstartMsg] = useState(false);
     const [score, setScore] = useState([]);
-    const [strokeColor, setStrokeColor] = useState('#ffffff'); 
+    const [strokeColor, setStrokeColor] = useState('#ffffff');
+    const backgrounds = ['background1', 'background2', 'background3'];
+
+    // Load the background index from localStorage on page load
+    const [backgroundClass, setBackgroundClass] = useState('background1');
+
+    useEffect(() => {
+        const savedIndex = localStorage.getItem('backgroundIndex');
+        if (savedIndex !== null) {
+            setBackgroundClass(backgrounds[parseInt(savedIndex, 10)]);
+        }
+    }, []);
 
 
 
 
-    function generateRandomColor (){
+
+    function generateRandomColor() {
         const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
         setStrokeColor(randomColor);
     };
@@ -153,14 +165,18 @@ const Game = () => {
 
 
     return (
-        <div className="game-container">
+
+
+
+
+        <div className={`App ${backgroundClass}`}>
 
             {preGame && (
                 <>
                     <div className="preGameScreen">
                         {!startMsg && (
                             <>
-                                <div className="countdown-time" style={{WebkitTextStroke: `10px ${strokeColor}`}}>{countDown}</div>
+                                <div className="countdown-time" style={{ WebkitTextStroke: `10px ${strokeColor}` }}>{countDown}</div>
                             </>
                         )}
 
@@ -173,7 +189,6 @@ const Game = () => {
                 </>
 
             )}
-
             <div className="topBar">
                 <div className="scoreboard">
                     {score.map((user, index) => (

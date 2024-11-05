@@ -169,8 +169,9 @@ const Lobby = () => {
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Type a message..."
+                                className='Inputchat'
                             />
-                            <button type="submit">Send</button>
+                            <button type="submit" className='SendButton'>Send</button>
                         </form>
                     </div>
                 </>

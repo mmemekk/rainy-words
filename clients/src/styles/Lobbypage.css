@@ -13,7 +13,7 @@
     width: 32vw;
     height: 77vh;
     background-color: #87BDCF;
-    border-radius: 30px; 
+    border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow effect */
     padding: 2%;
     display: flex;
@@ -28,9 +28,9 @@
 
 .userItem {
 
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
-    text-align: center; 
+    text-align: center;
     font-size: 35px;
     background-color: #306a0e;
     border-radius: 32px;
@@ -57,7 +57,7 @@
 }
 
 .user1{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 5.2vh;
     background-color: #ADD2DE;
@@ -73,7 +73,7 @@
     transform: translate(-50%,-50%);
 }
 .user2{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 5.2vh;
     background-color: #ADD2DE;
@@ -89,7 +89,7 @@
     transform: translate(-50%,-50%);
 }
 .user3{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 5.2vh;
     background-color: #ADD2DE;
@@ -105,7 +105,7 @@
     transform: translate(-50%,-50%);
 }
 .user4{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 5.2vh;
     background-color: #ADD2DE;
@@ -121,7 +121,7 @@
     transform: translate(-50%,-50%);
 }
 .user5{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 5.2vh;
     background-color: #ADD2DE;
@@ -137,7 +137,7 @@
     transform: translate(-50%,-50%);
 }
 .user6{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 5.2vh;
     background-color: #ADD2DE;
@@ -285,13 +285,14 @@
     right: 10%;
     width: 300px;
     height: 400px;
-    background: white;
+    background: #DAD7D5;
     border: 1px solid #ccc;
     padding: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    border-radius: 32px;
 }
 
 .close-chat {
@@ -300,6 +301,11 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
+    font-family: 'SuperMario256';
+    color: #D73D3F;
+    border: #D9D9D9;
+    border-width: 2px;
+
 }
 
 .chat-messages {
@@ -310,5 +316,29 @@
 
 .chat-message {
     padding: 5px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #000;
+}
+
+.SendButton{
+    font-family: 'SuperMario256';
+    border: 0;
+    padding: 2%;
+    height: 3vh;
+    border-radius: 32px;
+    background-color: #D2A93F;
+    color: #000;
+}
+
+.Inputchat{
+    width: 15vw;
+    margin-right: 2%;
+    border-radius: 32px;
+    border-width: 0;
+    background-color: #000;
+    padding: 3%;
+}
+
+.Inputchat::placeholder{
+    color: #ffff;
+    opacity: 50%;
 }

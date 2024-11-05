@@ -1,9 +1,9 @@
 .game-container {
     background-image: url('../../public/Netcentric.jpg');
     background-position: center center;
-    background-size: cover; 
+    background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;  
+    background-attachment: fixed;
     width: 100vw;
     height: 100vh;
     margin: 0;
@@ -41,85 +41,85 @@
     width: 87vw;
     height: 5vh;
     background-color: #ffffffc3;
-    border-radius: 30px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 2%;
     display: flex;
-    flex-direction:row; 
+    flex-direction:row;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     position:absolute;
     top:9%;
     left:50%;
     transform: translate(-50%,-50%);
 }
 .player1{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 3vh;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     position:absolute;
     top:50%;
     left:10%;
     transform: translate(-50%,-50%);
 }
 .player2{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 3vh;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     position:absolute;
     top:50%;
     left:63%;
     transform: translate(-50%,-50%);
 }
 .player3{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 3vh;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     position:absolute;
     top:50%;
     left:23%;
     transform: translate(-50%,-50%);
 }
 .player4{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 3vh;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     position:absolute;
     top:50%;
     left:76%;
     transform: translate(-50%,-50%);
 }
 .player5{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 3vh;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     position:absolute;
     top:50%;
     left:36%;
     transform: translate(-50%,-50%);
 }
 .player6{
-    color: #000000; 
+    color: #000000;
     font-family: "SuperMario256";
     font-size: 3vh;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     position:absolute;
     top:50%;
     left:89%;
@@ -196,8 +196,8 @@
     font-size: 3.2vw;
     color: #FF0000;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     position:absolute;
     top:50%;
     left:50%;

@@ -45,9 +45,20 @@ const Result = () => {
         socket.emit("removeUser");
         navigate('/');
     }
+    const backgrounds = ['background1', 'background2', 'background3'];
+
+    // Load the background index from localStorage on page load
+    const [backgroundClass, setBackgroundClass] = useState('background1');
+
+    useEffect(() => {
+      const savedIndex = localStorage.getItem('backgroundIndex');
+      if (savedIndex !== null) {
+        setBackgroundClass(backgrounds[parseInt(savedIndex, 10)]);
+      }
+    }, []);
 
     return (
-        <div className='background'>
+        <div className={`App ${backgroundClass}`}>
 
             <div className='Text-scoreboard'>
                 Score Board

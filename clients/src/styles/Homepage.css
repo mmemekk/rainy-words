@@ -13,8 +13,8 @@ html {
 
 }
 
-.homebg {
-  background-image: url('../../public/Netcentric.jpg');
+.background1{
+  background-image: url("../../public/Netcentric.jpg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -25,7 +25,30 @@ html {
   padding: 0;
 }
 
-/* Homepage.css */
+.background2{
+  background-image: url("../../public/Bg2.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.background3{
+  background-image: url("../../public/Bg3.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
 
 svg {
   width: 100%;
@@ -101,8 +124,8 @@ svg {
 }
 
 .btnNext:active {
-  background-color: #183e4a; 
-  transform: translate(-50%, -50%) scale(0.97); 
+  background-color: #183e4a;
+  transform: translate(-50%, -50%) scale(0.97);
 }
 
 
@@ -156,5 +179,21 @@ svg {
 
 .close-btn:active {
   color: rgb(158, 21, 21);
-  transform: translate(-50%, -50%) scale(0.97); 
+  transform: translate(-50%, -50%) scale(0.97);
+}
+
+.ThemeButt{
+  color: #ffffff;
+  background-color: #82B4FB;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-family: "SuperMario256";
+  font-size: 2vw;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 90%;
+  left: 95%;
+  transform: translate(-50%, -50%);
 }

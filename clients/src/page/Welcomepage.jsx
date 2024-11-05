@@ -10,12 +10,22 @@ const Welcome = () => {
 
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
+    const backgrounds = ['background1', 'background2', 'background3'];
+    // Load the background index from localStorage on page load
+    const [backgroundClass, setBackgroundClass] = useState('background1');
+
+    useEffect(() => {
+        const savedIndex = localStorage.getItem('backgroundIndex');
+        if (savedIndex !== null) {
+            setBackgroundClass(backgrounds[parseInt(savedIndex, 10)]);
+        }
+    }, []);
 
 
     useEffect(() => {
-        socket.on("returnHome", () =>{
+        socket.on("returnHome", () => {
             navigate('/');
-          })
+        })
 
         socket.emit("getUserName", socket.id);
         socket.on("userName", (name) => {
@@ -29,8 +39,8 @@ const Welcome = () => {
         socket.emit("requestUserInfo");
 
         socket.on("userInfo", (userInfo) => {
-            for(const user of userInfo){
-                if(user.id === socket.id){
+            for (const user of userInfo) {
+                if (user.id === socket.id) {
                     setUserName(user.name);
                     return;
                 }
@@ -45,19 +55,20 @@ const Welcome = () => {
 
     function handlePlayButtonClick() {
         const clickAudio = new Audio("/click.mp3");
-        clickAudio.play();  
+        clickAudio.play();
         navigate('/lobby');
     }
 
 
 
+
     return (
         <>
-            <div className="welcomebg">
+            <div className={`App ${backgroundClass}`}>
                 <h className="welcomeText">Welcome</h>
                 <h className="nameText">{userName}</h>
 
-                    {/* <img src='../../public/avatar1.png' className='gallery-image' />
+                {/* <img src='../../public/avatar1.png' className='gallery-image' />
                     <img src='../../public/avatar2.png' className='gallery-image' />
                     <img src='../../public/avatar3.png' className='gallery-image' />
                     <img src='../../public/avatar4.png' className='gallery-image' />

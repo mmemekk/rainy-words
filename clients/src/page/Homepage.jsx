@@ -4,15 +4,31 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Homepage.css';
 import { socket } from "../utils/socket.jsx";
 
-export let userName = '';
-
 const Home = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
   const [noInputMessage, setNoInputMessage] = useState(false);
+  const backgrounds = ['background1', 'background2', 'background3'];
+  const themebutDis = ['☀️','⛅️','🌙']
 
 
+  // State to keep track of the current background index
+  // const [backgroundIndex, setBackgroundIndex] = useState(0);
+  const [backgroundIndex, setBackgroundIndex] = useState(() => {
+    const savedIndex = localStorage.getItem('backgroundIndex');
+    return savedIndex !== null ? parseInt(savedIndex, 10) : 0;
+  });
+
+  // Function to cycle through the backgrounds
+  const cycleBackground = () => {
+    const newIndex = (backgroundIndex + 1) % backgrounds.length;
+    setBackgroundIndex(newIndex);
+    localStorage.setItem('backgroundIndex', newIndex);
+  };
+
+
+  
   useEffect(() => {
 
     socket.on("returnHome", () =>{
@@ -38,11 +54,10 @@ const Home = () => {
 
     setTimeout(() => { // just want messageAudio to play after Click Audio
       if (name === '') {
-          messageAudio.play();  
+          messageAudio.play();
           setNoInputMessage(true);
       } else {
           socket.emit('addUser', name.trim());
-          // userName = name;
           setName('');
       }
   }, 350);
@@ -57,27 +72,37 @@ const Home = () => {
   function errorUser() {
     socket.on("fail_addUser", () => {
       const messageAudio = new Audio("/message.mp3");
-      messageAudio.play();  
+      messageAudio.play();
       setErrorMessage(true);
     })
   }
 
   function closeErrorMessage() {
     const clickAudio = new Audio("/click.mp3");
-    clickAudio.play();  
+    clickAudio.play();
     setErrorMessage(false);
   }
 
   function closeNoInputMessage() {
     const clickAudio = new Audio("/click.mp3");
-    clickAudio.play();  
+    clickAudio.play();
     setNoInputMessage(false);
   }
 
+  // const [backgroundClass, setBackgroundClass] = useState('bg1');
+
+  // const toggleBackground = () => {
+  //   setBackgroundClass((prevClass) =>
+  //     prevClass === 'bg1' ? 'bg2' : 'bg1'
+  //   );
+  // };
+
+
+
+
   return (
     <>
-      <div className='homebg'>
-        
+      <div className={`App ${backgrounds[backgroundIndex]}`}>
         <svg viewBox="0 0 500 200">
           <path id="curve" className="path" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" />
           <text width="500" className="curvedText">
@@ -127,9 +152,9 @@ const Home = () => {
             </div>
           </>
         )}
+        <button className='ThemeButt' onClick={cycleBackground}>{themebutDis[backgroundIndex]}</button>
       </div>
     </>
-
   );
 
 
