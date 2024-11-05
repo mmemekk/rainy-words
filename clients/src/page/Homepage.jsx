@@ -98,6 +98,8 @@ const Home = () => {
     localStorage.setItem('backgroundIndex', newIndex);
   };
 
+  const themebutDis = ['☀️','⛅️','🌙']
+
   return (
     <>
       <div className={`App ${backgrounds[backgroundIndex]}`}>
@@ -150,7 +152,7 @@ const Home = () => {
             </div>
           </>
         )}
-        <button className='ThemeButt' onClick={cycleBackground}>⛅</button>
+        <button className='ThemeButt' onClick={cycleBackground}>{themebutDis[backgroundIndex]}</button>
       </div>
     </>
   );
