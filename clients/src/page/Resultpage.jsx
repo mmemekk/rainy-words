@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Resultpage.css';
-import {socket} from "../utils/socket.jsx";
+import { socket } from "../utils/socket.jsx";
 
-const Result = ()=>{
+const Result = () => {
     const navigate = useNavigate();
-    const [userState, setUserState]=useState(socket.id);
-    const [userResult, setUserResult] = useState(socket.id);
+    const [userState, setUserState] = useState(socket.id);
+    const [userResult, setUserResult] = useState([]);
 
 
     useEffect(() => {
@@ -23,18 +23,16 @@ const Result = ()=>{
             return;
         }
 
-        socket.on("returnHome", () =>{
+        socket.on("returnHome", () => {
             navigate('/');
-          })
+        })
 
         socket.emit("requestResult");
 
-        // socket.on("gameResult", (result) =>{
-        //     console.log("This is result:", result);
-        //     // setUserResult(result.map(item => {item.name,item.score}));
-        //     setUserResult(result.map(item => [item.name, item.score]));
-        //     console.log("This is result:", userResult);
-        // })
+        socket.on("gameResult", (result) =>{
+            console.log("This is result:", result);
+            setUserResult(result);
+        })
 
         return () => {
             socket.off("requestResult");
@@ -43,18 +41,41 @@ const Result = ()=>{
         };
     }, []);
 
+    function handleHomeButtonClick(){
+        socket.emit("removeUser");
+        navigate('/');
+    }
+    const backgrounds = ['background1', 'background2', 'background3'];
+
+    // Load the background index from localStorage on page load
+    const [backgroundClass, setBackgroundClass] = useState('background1');
+
+    useEffect(() => {
+      const savedIndex = localStorage.getItem('backgroundIndex');
+      if (savedIndex !== null) {
+        setBackgroundClass(backgrounds[parseInt(savedIndex, 10)]);
+      }
+    }, []);
+
     return (
-        <div className='background'>
+        <div className={`App ${backgroundClass}`}>
+
             <div className='Text-scoreboard'>
-                <p className='textscore'>Score Board</p>
+                Score Board
             </div>
+
             <div className="result-container">
-                {/* <ul class="result-list">
-                    {userResult.map((user, index) => (
-                        <li key={index}>{user}</li>
+                <div class="user-list">
+                    {userResult.map((data, index) => (
+                        <div key={index} className="user-row">
+                            <div className="user">{data.name}</div>
+                            <div className="score">{data.score}</div>
+                        </div>
                     ))}
-                </ul> */}
+                </div>
             </div>
+
+            <button type="button" className='btnHome'onClick={handleHomeButtonClick}> back to home </button>
         </div>
     );
 

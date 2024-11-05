@@ -13,8 +13,32 @@ html {
 
 }
 
-.homebg {
-  background-image: url('../../public/Netcentric.jpg');
+.background1{
+  background-image: url("../../public/Netcentric.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.background2{
+  background-image: url("../../public/Bg2.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.background3{
+  background-image: url("../../public/Bg3.png");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -44,7 +68,7 @@ svg {
   fill: #245666; /* Text color */
   font-size: 30px; /* Set font size */
   font-family: 'SuperMario256'; /* Use the custom font */
-
+  letter-spacing: 2px;
   text-shadow:
   2px 2px 0 #ffff,
   -2px 2px 0 #ffffff,
@@ -74,6 +98,7 @@ svg {
   color: #245666;
   font-size: 3.5vw;
   opacity: 65%;
+  letter-spacing: 3px;
 }
 
 .btnNext {
@@ -84,14 +109,27 @@ svg {
   border-radius: 64px;
   font-family: "SuperMario256";
   font-size: 2.75vw;
-  border-width: 0px;
+  border: none;
   cursor: pointer;
   position: absolute;
   top: 63%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding-top: 10px;
+
 }
+
+.btnNext:hover {
+  background-color: #1e4a5c;
+
+}
+
+.btnNext:active {
+  background-color: #183e4a;
+  transform: translate(-50%, -50%) scale(0.97);
+}
+
+
 
 .errormessage {
   z-index: 9999;
@@ -137,5 +175,26 @@ svg {
 }
 
 .close-btn:hover {
-  color: #e9922e;
+  color: rgb(198, 28, 28);
+}
+
+.close-btn:active {
+  color: rgb(158, 21, 21);
+  transform: translate(-50%, -50%) scale(0.97);
+}
+
+.ThemeButt{
+  color: #ffffff;
+  background-color: #82B4FB;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-family: "SuperMario256";
+  font-size: 2vw;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 90%;
+  left: 95%;
+  transform: translate(-50%, -50%);
 }

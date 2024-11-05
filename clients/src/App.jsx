@@ -12,16 +12,19 @@ import Game from "./page/Gamepage.jsx"
 import Result from "./page/Resultpage.jsx"
 import Admin from "./page/Adminpage.jsx"
 import Login from "./page/Loginpage.jsx"
+import AudioPlayer from './utils/audioPlayer.jsx';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+
   return (
     <BrowserRouter>
       <div className="App">
-        <Routes>
+        <AudioPlayer/>
 
-          <Route path="/" element={<Home />} />
+        <Routes>
+          <Route path="/" element={<Home/>} />
           <Route path="/welcome" element={<Welcome/>} />
           <Route path="/lobby" element={<Lobby/>} />
           <Route path="/game" element={<Game/>} />

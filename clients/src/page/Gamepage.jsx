@@ -13,6 +13,7 @@ const Game = ()=>{
     const [timer, setTimer] = useState({ minute: 5, second: 0 }); // State for timer (5 minutes)
     const [score,setScore] = useState([]);
 
+
     useEffect(() => {
 
         // If socket.id is not defined, navigate to home and return early
@@ -87,10 +88,6 @@ const Game = ()=>{
     // }, [fallingWords]);
 
 
-    function retoprevious(){
-        navigate('/');
-    }
-
 
     function handleInput(event){
         let { value } = event.target;
@@ -104,19 +101,34 @@ const Game = ()=>{
             socket.emit("submitWord",answer);
 
             setFallingWords((prevWords) => prevWords.filter((word) => word.text !== answer));
+            const correctAudio = new Audio("/correct.mp3");
+            correctAudio.play();
 
         } else{
             console.log("no word founded");
+            const wrongAudio = new Audio("/wrong.mp3");
+            wrongAudio.play();
         }
-        setAnswer('');
 
+        setAnswer('');
     }
 
+    const backgrounds = ['background1', 'background2', 'background3'];
+
+    // Load the background index from localStorage on page load
+    const [backgroundClass, setBackgroundClass] = useState('background1');
+
+    useEffect(() => {
+      const savedIndex = localStorage.getItem('backgroundIndex');
+      if (savedIndex !== null) {
+        setBackgroundClass(backgrounds[parseInt(savedIndex, 10)]);
+      }
+    }, []);
 
 
 
     return (
-        <div className="game-container">
+        <div className={`App ${backgroundClass}`}>
             <div className="topBar">
                 <div className="scoreboard">
                     {score.map((user, index) => (
@@ -126,7 +138,7 @@ const Game = ()=>{
                     ))}
                 </div>
 
-                
+
                 <div className='clock'>
                     {timer.minute}:{timer.second < 10 ? `0${timer.second}` : timer.second}
                 </div>
