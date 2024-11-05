@@ -99,9 +99,14 @@ const Lobby = () => {
         setIsChatOpen(true);
     }
 
-    function handleCloseButtionClick(){
+    function handleCloseButtonClick(){
         clickAudio.play();
         setIsChatOpen(false);
+    }
+
+    function handleReturnButtonClick(){
+        socket.emit("removeUser");
+        navigate('/');
     }
 
     useEffect(() => {
@@ -125,7 +130,7 @@ const Lobby = () => {
             <div>
 
 
-                <button className='Return'>Return</button>
+                <button className='Return' onClick={handleReturnButtonClick}>Return</button>
             </div>
             <div className='chooseModeWin'><p className='ChooseMode'> Choose your mode</p>
                 <div className='modeWinContent'>
@@ -153,7 +158,7 @@ const Lobby = () => {
             {isChatOpen && (
                 <>
                     <div className="chat-overlay">
-                        <button className="close-chat" onClick={handleCloseButtionClick}>X</button>
+                        <button className="close-chat" onClick={handleCloseButtonClick}>X</button>
                         <div className="chat-messages">
                             {messages.map((data, index) => (
                                 <div key={index} className="chat-message">{data.sender}: {data.message}</div>

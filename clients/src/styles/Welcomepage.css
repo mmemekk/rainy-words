@@ -80,4 +80,15 @@ body, html {
     top: 60%;
     left: 50%; /* Change right to left */
     transform: translate(-50%, -50%); /* Center the button */
+    cursor: pointer;
+  }
+
+  .btnPlay:hover {
+    background-color: #1e4a5c;
+  
+  }
+  
+  .btnPlay:active {
+    background-color: #183e4a; 
+    transform: translate(-50%, -50%) scale(0.97); 
   }

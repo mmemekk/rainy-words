@@ -1,17 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Gamepage.css';
-import {socket} from "../utils/socket.jsx";
+import { socket } from "../utils/socket.jsx";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
-const Game = ()=>{
+const Game = () => {
     const navigate = useNavigate();
-    const [userState, setUserState]=useState(socket.id);
+    const [userState, setUserState] = useState(socket.id);
     const [fallingWords, setFallingWords] = useState([]);
     const [answer, setAnswer] = useState('');
     const [timer, setTimer] = useState({ minute: 5, second: 0 }); // State for timer (5 minutes)
-    const [score,setScore] = useState([]);
+    const [countDown, setcountDown] = useState();
+    const [preGame, setpreGame] = useState(true);
+    const [startMsg, setstartMsg] = useState(false);
+    const [score, setScore] = useState([]);
+    const [strokeColor, setStrokeColor] = useState('#ffffff'); 
+
+
+
+
+    function generateRandomColor (){
+        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+        setStrokeColor(randomColor);
+    };
+
 
 
     useEffect(() => {
@@ -22,19 +35,49 @@ const Game = ()=>{
             return;
         }
 
-        if(socket.id!==userState){
+        if (socket.id !== userState) {
             setUserState(socket.id);
             navigate('/');
             return;
         }
 
-        socket.on("returnHome", () =>{
+        socket.on("returnHome", () => {
             navigate('/');
-          })
+        })
 
-        socket.emit("startButton");
+        socket.emit("requestCountDown");
 
-        socket.on("newWord", (word,position) => {
+        socket.on("countDown", (time) => {
+            generateRandomColor();
+            setcountDown(time);
+            const countDownAudio = new Audio("countdown.mp3");
+            countDownAudio.volume = 0.3;
+            countDownAudio.play();
+        });
+
+        socket.on("countDownEnd", () => {
+            setstartMsg(true);
+            const startAudio = new Audio("start.mp3");
+            startAudio.volume = 0.3;
+            startAudio.play();
+            setTimeout(() => {
+                setstartMsg(false);
+                setpreGame(false);
+                socket.emit("startButton");
+            }, 1000);
+        });
+
+
+
+        socket.on("counter", (time) => {
+            setTimer(time);
+        });
+
+        socket.on("userInfo", (userInfo) => {
+            setScore(userInfo);
+        })
+
+        socket.on("newWord", (word, position) => {
             console.log(word);
             const randomPosition = position;
 
@@ -55,20 +98,12 @@ const Game = ()=>{
 
         });
 
-        socket.on("counter", (time) => {
-            setTimer(time); // Update the timer state with the received time
-        });
-
-        socket.on("userInfo", (userInfo) =>{
-            setScore(userInfo);
-        })
-
-        socket.on("updateScore", (userInfo) =>{
+        socket.on("updateScore", (userInfo) => {
             setScore(userInfo);
             console.log(userInfo);
         })
 
-        socket.on("timesUp",() =>{
+        socket.on("timesUp", () => {
             navigate('/result');
         })
 
@@ -83,28 +118,29 @@ const Game = ()=>{
     }, []);
 
 
+
     // useEffect(() => {
     //     console.log("Updated fallingWords array:", fallingWords);
     // }, [fallingWords]);
 
 
 
-    function handleInput(event){
+    function handleInput(event) {
         let { value } = event.target;
         setAnswer(value);
     }
 
-    function submitWord(event){
+    function submitWord(event) {
         event.preventDefault();
         const wordExist = fallingWords.some(word => word.text === answer);
-        if(wordExist){
-            socket.emit("submitWord",answer);
+        if (wordExist) {
+            socket.emit("submitWord", answer);
 
             setFallingWords((prevWords) => prevWords.filter((word) => word.text !== answer));
             const correctAudio = new Audio("/correct.mp3");
             correctAudio.play();
 
-        } else{
+        } else {
             console.log("no word founded");
             const wrongAudio = new Audio("/wrong.mp3");
             wrongAudio.play();
@@ -118,16 +154,36 @@ const Game = ()=>{
 
     return (
         <div className="game-container">
+
+            {preGame && (
+                <>
+                    <div className="preGameScreen">
+                        {!startMsg && (
+                            <>
+                                <div className="countdown-time" style={{WebkitTextStroke: `10px ${strokeColor}`}}>{countDown}</div>
+                            </>
+                        )}
+
+                        {startMsg && (
+                            <>
+                                <div className="start-message">START!</div>
+                            </>
+                        )}
+                    </div>
+                </>
+
+            )}
+
             <div className="topBar">
                 <div className="scoreboard">
                     {score.map((user, index) => (
-                        <div key={index} className={`player${index+1}`}>
+                        <div key={index} className={`player${index + 1}`}>
                             {user.name}:{user.score}
                         </div>
                     ))}
                 </div>
 
-                
+
                 <div className='clock'>
                     {timer.minute}:{timer.second < 10 ? `0${timer.second}` : timer.second}
                 </div>

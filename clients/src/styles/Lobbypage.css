@@ -207,6 +207,7 @@
 .goLeftButt{
     font-size: 64px;
     color: #fff;
+    cursor: pointer;
 }
 
 .goRight{
@@ -219,6 +220,7 @@
 .goRightButt{
     font-size: 64px;
     color: #fff;
+    cursor:pointer;
 }
 
 .ModeDes{
@@ -259,6 +261,7 @@
     font-family: 'SuperMario256';
     text-align: center;
     justify-content: center;
+    cursor:pointer;
 }
 
 .Chatbox{
@@ -273,6 +276,7 @@
     text-align: center;
     justify-content: center;
     right: 2%;
+    cursor:pointer;
 }
 
 .chat-overlay {

@@ -9,6 +9,33 @@
     margin: 0;
     padding: 0;
 }
+.preGameScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(70, 68, 68, 0.433); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10; /* Ensures overlay is on top */
+}
+.countdown-time {
+    font-family: "SuperMario256";
+    font-size: 30vh;
+    color: #ffffff; 
+    text-align: center;
+}
+
+.start-message {
+    font-family: "SuperMario256";
+    font-size: 20vh;
+    color: #ffffff;
+    -webkit-text-stroke: 10px#069814;
+    text-align: center;
+}
+
 
 .topBar {
     width: 87vw;

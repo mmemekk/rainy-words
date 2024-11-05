@@ -3,6 +3,7 @@ const { addUser, removeUser, get_userInfo, get_nameFromId, get_count, get_result
 const { sendMessage } = require('./serverfunctions/chatmessage.js');
 const {setgameMode} = require('./serverfunctions/randomword.js')
 const { trackTime, resetTimer,isGameRunning } = require('./serverfunctions/timer.js'); 
+const {countDown} = require('./serverfunctions/countdown.js'); 
 const { calculateScore } = require('./serverfunctions/scoring.js');
 
 io.on('connection', (socket) => {
@@ -33,12 +34,16 @@ io.on('connection', (socket) => {
     socket.on("setKeys", (keys) => {
         io.emit("setKeys",keys);
     })
-    
-    socket.on("startButton", () => {
-        console.log("start Button");
-        trackTime(socket);
+
+    socket.on("requestCountDown", () => {
+        countDown(socket);
         io.emit("gameStart");
         io.emit("userInfo",get_userInfo());
+
+    });
+    
+    socket.on("startButton", () => {
+        trackTime(socket);
     });
 
 
