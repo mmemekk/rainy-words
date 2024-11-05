@@ -137,28 +137,40 @@
 
 .falling-word {
     font-family: "SuperMario256";
-    font-size: 4vh;
+    font-size: 4.5vh;
     letter-spacing: 2px ;
-    -webkit-text-stroke: 1px white;
+
     position: absolute;
-    color: rgb(0, 0, 0);
+    -webkit-text-stroke: 1.5px white;
     animation: fall 5s linear forwards;
 }
 
+.score-popup {
+    font-family: "SuperMario256";
+    position: absolute;
+    color: #069814;
+    -webkit-text-stroke: 1.5px white;
+    font-size: 3.2vw;
+    opacity: 0; /* Start as invisible */
+    animation:  fadeOut 1s forwards; /* Adding fade in and fade out animations */
+}
+
+
 
 @keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
+    0% { opacity: 1 }
+    50% { opacity: 1 }
+    100% { opacity: 0; transform: translateY(-20px)}
 }
 
 
 @keyframes fall {
     0% {
-        top: 15vh;
+        top: 15%;
         opacity: 1;
     }
     100% {
-        top: 75vh;
+        top: 75%;
         opacity: 1;
     }
 }
@@ -183,6 +195,7 @@
     top:85%;
     left:50%;
     transform: translate(-50%,-50%);
+    letter-spacing: 2px ;
 }
 
 .inputBox::placeholder{
@@ -203,3 +216,4 @@
     left:50%;
     transform: translate(-50%,-50%);
 }
+

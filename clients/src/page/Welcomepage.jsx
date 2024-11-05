@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Welcomepage.css';
 import { socket } from "../utils/socket.jsx";
-import Input from "../components/Input";
-import Button from "../components/Button";
 
 
 const Welcome = () => {
@@ -78,7 +76,7 @@ const Welcome = () => {
                     <img src='../../public/avatar8.png' className='gallery-image' /> */}
 
 
-                <Button className="btnPlay" placeHolder='play' onClick={handlePlayButtonClick} />
+                <button type ="button" className="btnPlay" onClick={handlePlayButtonClick}> play </button>
             </div>
         </>
     );

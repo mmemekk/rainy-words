@@ -11,10 +11,6 @@ const Home = () => {
   const [noInputMessage, setNoInputMessage] = useState(false);
   const backgrounds = ['background1', 'background2', 'background3'];
   const themebutDis = ['☀️','⛅️','🌙']
-
-
-  // State to keep track of the current background index
-  // const [backgroundIndex, setBackgroundIndex] = useState(0);
   const [backgroundIndex, setBackgroundIndex] = useState(() => {
     const savedIndex = localStorage.getItem('backgroundIndex');
     return savedIndex !== null ? parseInt(savedIndex, 10) : 0;
@@ -28,7 +24,7 @@ const Home = () => {
   };
 
 
-  
+
   useEffect(() => {
 
     socket.on("returnHome", () =>{
@@ -88,15 +84,6 @@ const Home = () => {
     clickAudio.play();
     setNoInputMessage(false);
   }
-
-  // const [backgroundClass, setBackgroundClass] = useState('bg1');
-
-  // const toggleBackground = () => {
-  //   setBackgroundClass((prevClass) =>
-  //     prevClass === 'bg1' ? 'bg2' : 'bg1'
-  //   );
-  // };
-
 
 
 

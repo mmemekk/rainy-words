@@ -1,10 +1,3 @@
-.background{
-    overflow: hidden;
-    height: 100vh;
-    background-color: #f0f0f0;
-    background-image: url("../../public/Netcentric.jpg");
-    background-size: cover;
-}
 
 .result-container{
     width: 45vw;
@@ -24,8 +17,6 @@
 }
 
 
-
-
 .Text-scoreboard{
     font-family: "SuperMario256";
     color:#EA3E3E;
@@ -33,8 +24,11 @@
     font-size: 8vh;
     text-align: center;
     margin:auto;
-    margin-top: 8vh;
-    margin-bottom: 4vh;
+    position: absolute;
+    top:10%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
 }
 
 

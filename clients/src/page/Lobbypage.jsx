@@ -112,6 +112,8 @@ const Lobby = () => {
     useEffect(() => {
         console.log(users);
     },[users]);
+
+    
     return (
         <div className="lobbybg">
             <div className="userListContainer">
