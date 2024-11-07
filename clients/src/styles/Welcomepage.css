@@ -19,50 +19,46 @@ body, html {
   padding: 0;
 }
 
-.avatar1{
-  width: 7vw;  /* Set a width */
-  height: 7vw; /* Set a height (same as width for a circle) */
-  border-radius: 50%; /* Makes the image circular */
-  object-fit: cover; /* Ensures the image covers the whole area */
-}
-.circular-container {
-  width: 100px;  /* Set the width */
-  height: 100px; /* Set the height (same as width for a circle) */
-  border-radius: 50%; /* Makes the div circular */
-  background-size: cover; /* Ensures the background image covers the area */
-  background-position: center; /* Centers the image */
-}
 
-.image-gallery {
-  display: grid; /* Use grid for structured layout */
-  grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
-  gap: 10px; /* Space between images */
-  max-width: 500px; /* Set a max width for the gallery */
-  margin: 0 auto; /* Center the gallery */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+
+    transform: translateX(-50%);
+  }
 }
-
-
 
 .welcomeText {
-    font-family: 'SuperMario256';
-    color: #245666;    
-    font-size: 6vw;             
-    position:absolute;
-    top:35%;
-    left:50%;
-    transform: translate(-50%, -50%); 
-  
-  }
-  
-  .nameText {
-    font-family: 'SuperMario256';
-    color: #1E708A;             
-    font-size: 6vw;             
-    position:absolute;
-    top:48%;
-    left:50%;
-    transform: translate(-50%, -50%); 
-  }
+  font-family: 'SuperMario256';
+  color: #245666;    
+  font-size: 7vw;             
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6); /* Add text shadow */
+  -webkit-text-stroke: 2px #ffffff; /* Add text stroke */
+  animation: fadeIn 1s ease-out forwards; 
+
+}
+
+.nameText {
+  font-family: 'SuperMario256';
+  color: #1E708A;             
+  font-size: 7vw;             
+  position: absolute;
+  top: 51%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6); /* Add text shadow */
+  -webkit-text-stroke: 2px #ffffff; /* Add text stroke */
+  animation: fadeIn 1s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.8s;
+}
   
   
   

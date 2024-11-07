@@ -30,6 +30,7 @@ const Home = () => {
 
   useEffect(() => {
 
+    //system reset
     socket.on("returnHome", () => {
       navigate('/');
     })

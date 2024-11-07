@@ -164,8 +164,8 @@
     background-color: #183e4a;
     text-align: center;
     justify-content: center;
-    width: 814px;
-    height: 417px;
+    width: 55vw;
+    height:53vh;
     display: block;
     margin-top: 10%;
     border-radius: 32px;
@@ -178,7 +178,7 @@
 }
 
 .ChooseMode{
-    font-size: 48px;
+    font-size: 7vh;
     color: #fff;
     margin-top: 50px;
 }
@@ -193,7 +193,8 @@
     border-radius: 32px;
 }
 .Mode{
-    font-size: 48px;
+    font-size: 7vh;
+    line-height: 3vh;
     color: #E1A60D;
     text-align: center;
     justify-content: center;
@@ -225,22 +226,23 @@
 
 .ModeDes{
     color: #fff;
-    font-size: 20px;
+    font-size: 3vh;
     letter-spacing: 2px;
 }
 
-.playButton{
-    color: #BCD08D;
-}
 
 .Play{
-    background-color:#BCD08D;
-    width: 256px;
-    height: 97px;
+    background-color:#69c76b;
+    width: 25vw;
+    height: 12vh;
     border-radius: 32px;
     text-align: center;
-    margin-top: 10%;
     border-width: 0px;
+    position: absolute;
+    top:71%;
+    left:69%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
 }
 
 .Playtext{
@@ -248,6 +250,8 @@
     font-size: 40px;
     font-family: "SuperMario256";
     margin: auto;
+    text-align: center;
+    letter-spacing: 2px;
 }
 
 .Return{
@@ -262,9 +266,9 @@
     justify-content: center;
     cursor:pointer;
     position: absolute;
-    top:87%;
-    left: 45%;
-    transform: translate(-50%,-50);
+    top:92%;
+    left: 49%;
+    transform: translate(-50%,-50%);
 }
 
 .Chatbox{
@@ -278,9 +282,9 @@
     text-align: center;
     justify-content: center;
     cursor:pointer;
-    top:87%;
-    left: 85%;
-    transform: translate(-50%,-50);
+    top:92%;
+    left:90%;
+    transform: translate(-50%,-50%);
 }
 
 .chat-overlay {

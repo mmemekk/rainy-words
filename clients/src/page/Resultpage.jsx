@@ -20,8 +20,12 @@ const Result = () => {
 
 
     useEffect(() => {
+        //system reset
+        socket.on("returnHome", () => {
+            navigate('/');
+        })
 
-        // If socket.id is not defined, navigate to home and return early
+        //handle if page is REFRESHED
         if (!socket.id) {
             navigate('/');
             return;
@@ -33,9 +37,6 @@ const Result = () => {
             return;
         }
 
-        socket.on("returnHome", () => {
-            navigate('/');
-        })
 
         socket.emit("requestResult");
 

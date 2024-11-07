@@ -42,7 +42,13 @@ const Game = () => {
 
 
     useEffect(() => {
-        // If socket.id is not defined, navigate to home and return early
+        
+        //system reset
+        socket.on("returnHome", () => {
+            navigate('/');
+        })
+
+        //handle if page is REFRESHED
         if (!socket.id) {
             navigate('/');
             return;
@@ -53,10 +59,6 @@ const Game = () => {
             navigate('/');
             return;
         }
-
-        socket.on("returnHome", () => {
-            navigate('/');
-        })
 
         socket.emit("requestCountDown");
 

@@ -5,9 +5,10 @@ const {setgameMode} = require('./serverfunctions/randomword.js')
 const { trackTime, resetTimer,isGameRunning } = require('./serverfunctions/timer.js'); 
 const {countDown} = require('./serverfunctions/countdown.js'); 
 const { calculateScore } = require('./serverfunctions/scoring.js');
+const { requestAccess } = require('./serverfunctions/admin.js');
 
 io.on('connection', (socket) => {
-    console.log("Client connected");
+    console.log("-----Client Connected-----");
 
     socket.on("addUser", (input) => {
         addUser(input, socket);
@@ -78,13 +79,22 @@ io.on('connection', (socket) => {
     });
 
     socket.on('disconnect', () => {
-        console.log('User disconnected');
+        console.log('-----User Disconnected-----');
         removeUser(socket.id, io);
         printUserInfo();
         io.emit("userInfo",get_userInfo());
 
         if(isGameRunning() && (get_count()===0)){ //if no user left while playing, stop reset the game
             resetTimer();
+        }
+    });
+
+    socket.on('adminRequestAccess', (inputUsername,inputPassword) => {
+        console.log(inputUsername, inputPassword);
+        if(requestAccess(inputUsername, inputPassword)){
+            socket.emit('accessGranted');
+        } else{
+            socket.emit('accessDenied');
         }
     });
 });

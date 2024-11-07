@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { socket } from "../utils/socket.jsx";
 
-
 const Login = ({loginSuccess})=>{
     const navigate = useNavigate();
     const [userState, setUserState]=useState(socket.id);
@@ -11,6 +10,7 @@ const Login = ({loginSuccess})=>{
     const [error, setError] = useState('');
 
     useEffect(() => {
+        console.log('login page');
 
         if (!socket.id) {
             navigate('/admin');
@@ -23,19 +23,24 @@ const Login = ({loginSuccess})=>{
             return;
         }
 
-
         return () => {
             
 
         };
     }, []);
 
+    socket.on("accessGranted", () => {
+        loginSuccess();
+        console.log("Access");
+    });
+
+    socket.on("accessDenied", () => {
+        setError("Invalid username or password");
+        console.log("Access Denied");
+    });
+
     function handleLogin(){
-        if(username.trim() === "admin" && password === "1234"){
-            loginSuccess();
-        } else{
-            setError("Invalid username or password");
-        }
+        socket.emit("adminRequestAccess",username,password);
     }
 
 

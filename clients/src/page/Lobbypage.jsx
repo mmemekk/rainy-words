@@ -21,6 +21,13 @@ const Lobby = () => {
     const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
+
+        //system reset
+        socket.on("returnHome", () => {
+            navigate('/');
+        });
+
+        //handle if page is REFRESHED
         if (!socket.id) {
             navigate('/');
             return;
@@ -31,8 +38,9 @@ const Lobby = () => {
             navigate('/');
         }
 
-        socket.on("returnHome", () => {
-            navigate('/');
+        //move to gamepage if game is Started
+        socket.on("gameStart", () => {
+            navigate('/game');
         });
 
         socket.emit("requestUserInfo");
@@ -43,10 +51,6 @@ const Lobby = () => {
 
         socket.on("setKeys", (keys) => {
             setKeys(keys);
-        });
-
-        socket.on("gameStart", () => {
-            navigate('/game');
         });
 
         socket.on('receiveMessage', (data) => {

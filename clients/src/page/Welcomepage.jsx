@@ -9,9 +9,8 @@ const Welcome = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
     const backgrounds = ['background1', 'background2', 'background3'];
-    // Load the background index from localStorage on page load
-    const [backgroundClass, setBackgroundClass] = useState('background1');
 
+    const [backgroundClass, setBackgroundClass] = useState('background1');
     useEffect(() => {
         const savedIndex = localStorage.getItem('backgroundIndex');
         if (savedIndex !== null) {
@@ -21,41 +20,39 @@ const Welcome = () => {
 
 
     useEffect(() => {
+        //system reset
         socket.on("returnHome", () => {
             navigate('/');
         })
 
-        socket.emit("getUserName", socket.id);
-        socket.on("userName", (name) => {
-            if (name === null) { //try to NAVIGATE back on REFRESH
+        socket.emit("requestUserInfo");
+        socket.on("userInfo", (userInfo) => {
+            const currentUser = userInfo.find(item => item.id === socket.id);
+            if(currentUser){
+                setUserName(currentUser.name);
+            } else{ // handle if page is refreshed
                 navigate('/');
-            } else {
-                setUserName(name);
             }
         });
 
-        socket.emit("requestUserInfo");
-
-        socket.on("userInfo", (userInfo) => {
-            for (const user of userInfo) {
-                if (user.id === socket.id) {
-                    setUserName(user.name);
-                    return;
-                }
-            }
-
-            setUserName("USER NOT FOUNDED");
-
-        })
+        //move to gamepage if game is Started
+        socket.on("gameStart", () => {
+            navigate('/game');
+        });
 
 
     }, []);
 
-    function handlePlayButtonClick() {
-        const clickAudio = new Audio("/click.mp3");
-        clickAudio.play();
+    setTimeout(() => {
         navigate('/lobby');
-    }
+    }, 3000);
+
+
+    // function handlePlayButtonClick() {
+    //     const clickAudio = new Audio("/click.mp3");
+    //     clickAudio.play();
+    //     navigate('/lobby');
+    // }
 
 
 
@@ -65,18 +62,7 @@ const Welcome = () => {
             <div className={`App ${backgroundClass}`}>
                 <h className="welcomeText">Welcome</h>
                 <h className="nameText">{userName}</h>
-
-                {/* <img src='../../public/avatar1.png' className='gallery-image' />
-                    <img src='../../public/avatar2.png' className='gallery-image' />
-                    <img src='../../public/avatar3.png' className='gallery-image' />
-                    <img src='../../public/avatar4.png' className='gallery-image' />
-                    <img src='../../public/avatar5.png' className='gallery-image' />
-                    <img src='../../public/avatar6.png' className='gallery-image' />
-                    <img src='../../public/avatar7.png' className='gallery-image' />
-                    <img src='../../public/avatar8.png' className='gallery-image' /> */}
-
-
-                <button type ="button" className="btnPlay" onClick={handlePlayButtonClick}> play </button>
+                {/* <button type ="button" className="btnPlay" onClick={handlePlayButtonClick}> play </button> */}
             </div>
         </>
     );
