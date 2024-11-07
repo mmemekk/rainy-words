@@ -42,7 +42,7 @@ const Game = () => {
 
 
     useEffect(() => {
-        
+
         //system reset
         socket.on("returnHome", () => {
             navigate('/');
@@ -118,9 +118,14 @@ const Game = () => {
             console.log(userInfo);
         })
 
-        socket.on("timesUp", () => {
-            navigate('/result');
-        })
+        socket.on("timesUp", (userInfo) => {
+
+            const isUserInScore = userInfo.some((user) => user.id === socket.id);
+            
+            if (isUserInScore) {
+                navigate('/result');
+            }
+        });
 
         return () => {
             socket.off("startButton");
@@ -128,6 +133,7 @@ const Game = () => {
             socket.off('counter');
             socket.off("userInfo");
             socket.off("updateScore");
+            socket.off("timesUp");
 
         };
     }, []);

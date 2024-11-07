@@ -61,6 +61,7 @@ const Lobby = () => {
             socket.off("requestUserInfo");
             socket.off("userInfo");
             socket.off("receiveMessage");
+            socket.off("gameStart");
         };
     }, []);
 

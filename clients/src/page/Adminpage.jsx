@@ -25,6 +25,7 @@ const Admin = () => {
 
     function resetGame() {
         socket.emit("resetSystem");
+        setUsers([]);
     }
 
 

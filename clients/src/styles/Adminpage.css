@@ -1,0 +1,65 @@
+
+/* Background styling */
+.adminbg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    background-color: #f3f4f6;
+    font-family: "Verdana", sans-serif;
+    padding-top: 60px; /* Space for the fixed button */
+}
+
+/* Fixed position for Reset Button */
+.BtnReset {
+    position: fixed;
+    top: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff4d4f;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1000; /* Ensures button stays on top */
+}
+
+.BtnReset:hover {
+    background-color: #d42d2f;
+}
+
+/* List of active users */
+.ActiveUser {
+    width: 100%;
+    max-width: 600px;
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px; /* Margin to separate from fixed button */
+
+}
+
+.ActiveUser li {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ActiveUser li:last-child {
+    border-bottom: none;
+}
+
+/* Styling for user details */
+.ActiveUser li span {
+    font-weight: bold;
+    color: #333;
+}

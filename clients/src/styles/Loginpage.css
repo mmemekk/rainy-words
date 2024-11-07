@@ -1,0 +1,70 @@
+/* Center the login container */
+.loginbg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f0f0f0; /* Optional background color */
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center content horizontally */
+    font-family: "Verdana";
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff; /* Background color for container */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+.title {
+    font-family: "Verdana";
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.username, .password {
+    font-family: "Verdana";
+    font-size: 16px;
+    padding: 10px;
+    margin: 10px 0; /* Adds space between input fields */
+    width: 100%; /* Full width within container */
+    max-width: 300px; /* Optional max width */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.username::placeholder, .password::placeholder {
+    font-family: "Verdana";
+    color: #999;
+}
+
+.login-button {
+    font-family: "Verdana";
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #245666;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px; /* Optional max width */
+    margin-top: 20px;
+}
+
+.login-button:hover {
+    background-color: #1e4a5c;
+}
+
+.login-button:active {
+    background-color: #183e4a;
+    transform: scale(0.97);
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
