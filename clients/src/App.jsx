@@ -15,8 +15,8 @@ import Login from "./page/Loginpage.jsx"
 import AudioPlayer from './utils/audioPlayer.jsx';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <BrowserRouter>
@@ -29,8 +29,8 @@ function App() {
           <Route path="/lobby" element={<Lobby/>} />
           <Route path="/game" element={<Game/>} />
           <Route path="/result" element={<Result/>} />
-          {/* <Route path="/admin" element={isAuthenticated ? <Admin /> : <LoginPage onLogin={() => setIsAuthenticated(true)} />} /> */}
-          <Route path='/admin' element={<Admin/>} />
+          <Route path="/admin" element={isAuthenticated ? <Admin /> : <Login loginSuccess={() => setIsAuthenticated(true)} />} />
+          {/* <Route path='/admin' element={<Admin/>} /> */}
         </Routes>
       </div>
     </BrowserRouter>

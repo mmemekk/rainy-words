@@ -12,7 +12,7 @@ const Lobby = () => {
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState([]);
     const mode = ["beginner", "intermediate", "expert"];
-    const modeDes = ["100 words, 5 minutes", "200 words, 5 minutes", "300 words, 5 minutes"];
+    const modeDes = ["Short Words", "medium-length words", "Long words"];
     const clickAudio = new Audio("click.mp3");
 
     const chatWindowRef = useRef(null);

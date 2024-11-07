@@ -1,5 +1,5 @@
 
-import { useEffect, useState,useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Homepage.css';
 import { socket } from "../utils/socket.jsx";
@@ -9,15 +9,18 @@ const Home = () => {
   const [name, setName] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
   const [noInputMessage, setNoInputMessage] = useState(false);
+  const [fullMessage, setFullMessage] = useState(false);
   const backgrounds = ['background1', 'background2', 'background3'];
-  const themebutDis = ['☀️','⛅️','🌙']
+  const themebutDis = ['☀️', '⛅️', '🌙']
   const [backgroundIndex, setBackgroundIndex] = useState(() => {
     const savedIndex = localStorage.getItem('backgroundIndex');
     return savedIndex !== null ? parseInt(savedIndex, 10) : 0;
   });
 
   // Function to cycle through the backgrounds
-  const cycleBackground = () => {
+  function cycleBackground() {
+    const clickAudio = new Audio("/click.mp3");
+    clickAudio.play();
     const newIndex = (backgroundIndex + 1) % backgrounds.length;
     setBackgroundIndex(newIndex);
     localStorage.setItem('backgroundIndex', newIndex);
@@ -27,12 +30,25 @@ const Home = () => {
 
   useEffect(() => {
 
-    socket.on("returnHome", () =>{
+    socket.on("returnHome", () => {
       navigate('/');
     })
 
-    addUser();
-    errorUser();
+    socket.on("success_addUser", () => {
+      navigate('/welcome');
+    })
+
+    socket.on("fail_addUser", () => {
+      const messageAudio = new Audio("/message.mp3");
+      messageAudio.play();
+      setErrorMessage(true);
+    })
+
+    socket.on("userFull", () => {
+      const messageAudio = new Audio("/message.mp3");
+      messageAudio.play();
+      setFullMessage(true);
+    })
 
   }, []);
 
@@ -50,28 +66,15 @@ const Home = () => {
 
     setTimeout(() => { // just want messageAudio to play after Click Audio
       if (name === '') {
-          messageAudio.play();
-          setNoInputMessage(true);
+        messageAudio.play();
+        setNoInputMessage(true);
       } else {
-          socket.emit('addUser', name.trim());
-          setName('');
+        socket.emit('addUser', name.trim());
+        setName('');
       }
-  }, 350);
+    }, 350);
   };
 
-  function addUser() {
-    socket.on("success_addUser", () => {
-      navigate('/welcome');
-    })
-  }
-
-  function errorUser() {
-    socket.on("fail_addUser", () => {
-      const messageAudio = new Audio("/message.mp3");
-      messageAudio.play();
-      setErrorMessage(true);
-    })
-  }
 
   function closeErrorMessage() {
     const clickAudio = new Audio("/click.mp3");
@@ -85,6 +88,11 @@ const Home = () => {
     setNoInputMessage(false);
   }
 
+  function closeFullMessage() {
+    const clickAudio = new Audio("/click.mp3");
+    clickAudio.play();
+    setFullMessage(false);
+  }
 
 
   return (
@@ -139,6 +147,20 @@ const Home = () => {
             </div>
           </>
         )}
+
+        {fullMessage&& (
+          <>
+            <div className="errormessage">
+              <h>this game is already full<br />Please Wait !</h>
+            </div>
+
+            <div >
+              <button className="close-btn" onClick={closeFullMessage}>X</button>
+            </div>
+          </>
+        )}
+
+
         <button className='ThemeButt' onClick={cycleBackground}>{themebutDis[backgroundIndex]}</button>
       </div>
     </>

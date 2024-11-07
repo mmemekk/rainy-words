@@ -1,5 +1,5 @@
 const { io, httpServer } = require('./serverfunctions/socket.js');
-const { addUser, removeUser, get_userInfo, get_nameFromId, get_count, get_result,resetData} = require('./serverfunctions/serverdata.js');
+const { addUser, removeUser, get_userInfo, get_nameFromId, get_count, get_result,resetData,printUserInfo} = require('./serverfunctions/serverdata.js');
 const { sendMessage } = require('./serverfunctions/chatmessage.js');
 const {setgameMode} = require('./serverfunctions/randomword.js')
 const { trackTime, resetTimer,isGameRunning } = require('./serverfunctions/timer.js'); 
@@ -11,7 +11,8 @@ io.on('connection', (socket) => {
 
     socket.on("addUser", (input) => {
         addUser(input, socket);
-        console.log(get_userInfo());
+        console.log("-----NEW user added-----");
+        printUserInfo();
     });
 
     socket.on("getUserName",(id) =>{
@@ -24,7 +25,7 @@ io.on('connection', (socket) => {
 
     socket.on("requestUserInfo",() =>{
         io.emit("userInfo",get_userInfo());
-        console.log("send user info");
+        // console.log("send user info");
     } )
 
     socket.on("gameMode", (mode) => {
@@ -62,8 +63,8 @@ io.on('connection', (socket) => {
             resetTimer();
         }
         io.emit("returnHome");
-        console.log("SYSTEM IS RESETED");
-        console.log(get_userInfo());
+        console.log("*****SYSTEM IS RESETED*****");
+        printUserInfo();
     });
 
     socket.on("removeUser",()=>{
@@ -72,13 +73,14 @@ io.on('connection', (socket) => {
         if(isGameRunning() && (get_count()===0)){ //if no user left while playing, stop reset the game
             resetTimer();
         }
-        console.log("removed user", get_userInfo());
+        console.log("-----User is REMMOVED-----");
+        printUserInfo();
     });
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
         removeUser(socket.id, io);
-        console.log(get_userInfo());
+        printUserInfo();
         io.emit("userInfo",get_userInfo());
 
         if(isGameRunning() && (get_count()===0)){ //if no user left while playing, stop reset the game

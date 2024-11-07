@@ -5,6 +5,11 @@ var count = 0;
 
 exports.addUser = function(input,socket){
 
+    if(count ===6){
+        socket.emit("userFull");
+        return;
+    }
+
     if (userInfo.some(user => user.name.toLowerCase() === input.toLowerCase())){ // check if username is already exist
         console.log('user already existed!');
         socket.emit("fail_addUser")
@@ -67,4 +72,8 @@ exports.get_userInfo = function(){
 
 exports.get_count = function(){
     return count;
+}
+
+exports.printUserInfo = function(){
+    console.log("User Info:", exports.get_userInfo());
 }
