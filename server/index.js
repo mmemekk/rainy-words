@@ -69,6 +69,9 @@ io.on('connection', (socket) => {
     socket.on("removeUser",()=>{
         removeUser(socket.id, io);
         io.emit("userInfo",get_userInfo());
+        if(isGameRunning() && (get_count()===0)){ //if no user left while playing, stop reset the game
+            resetTimer();
+        }
         console.log("removed user", get_userInfo());
     });
 

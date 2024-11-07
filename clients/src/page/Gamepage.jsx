@@ -97,7 +97,7 @@ const Game = () => {
                 id: Date.now(),
                 text: word,
                 position: randomPosition,
-                color:randomColor
+                color: randomColor
             };
 
             setFallingWords((prevWords) => [...prevWords, newWord]);
@@ -131,9 +131,6 @@ const Game = () => {
     }, []);
 
 
-
-
-
     function handleInput(event) {
         let { value } = event.target;
         setAnswer(value);
@@ -149,7 +146,7 @@ const Game = () => {
             const newScorePopup = {
                 id: Date.now(),
                 score: wordExist.text.length,
-                horizontalPosition: wordExist.position + (wordExist.text.length / 1.5), 
+                horizontalPosition: wordExist.position + (wordExist.text.length / 1.5),
                 verticalPosition: 15 + (12 * (Date.now() - wordExist.id) / 1000) //determine from transition time and (max,min) position
             };
 
@@ -171,6 +168,11 @@ const Game = () => {
         }
 
         setAnswer('');
+    }
+
+    function handleSurrenderClick(){
+        navigate('/');
+        socket.emit("removeUser");
     }
 
 
@@ -214,7 +216,8 @@ const Game = () => {
             <form onSubmit={submitWord} className="inputContainer">
                 <input className="inputBox" placeholder="Type Here ..." onChange={handleInput} value={answer}></input>
             </form>
-
+            
+            <button className='surrender-button' onClick={handleSurrenderClick}>🏳️</button>
 
 
             <div className="falling-words">
@@ -222,14 +225,14 @@ const Game = () => {
                     <div
                         key={word.id}
                         className={"falling-word"}
-                        style={{ left: `${word.position}%`,  color: `${word.color}` }}
+                        style={{ left: `${word.position}%`, color: `${word.color}` }}
                     >
                         {word.text}
                     </div>
                 ))}
 
                 {scorePopups.map((popup) => (
-            
+
                     <div
                         key={popup.id}
                         className="score-popup"

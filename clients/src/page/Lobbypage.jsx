@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Lobbypage.css';
 import { socket } from "../utils/socket.jsx";
 
 const Lobby = () => {
-
     const navigate = useNavigate();
     const [userState, setUserState] = useState(socket.id);
     const [users, setUsers] = useState([]);
@@ -16,8 +15,12 @@ const Lobby = () => {
     const modeDes = ["100 words, 5 minutes", "200 words, 5 minutes", "300 words, 5 minutes"];
     const clickAudio = new Audio("click.mp3");
 
-    useEffect(() => {
+    const chatWindowRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [position, setPosition] = useState({ x: 1000, y: 300 });
+    const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
 
+    useEffect(() => {
         if (!socket.id) {
             navigate('/');
             return;
@@ -30,45 +33,86 @@ const Lobby = () => {
 
         socket.on("returnHome", () => {
             navigate('/');
-        })
+        });
 
         socket.emit("requestUserInfo");
 
-
         socket.on("userInfo", (userInfo) => {
             setUsers(userInfo.map(item => item.name));
-
-        })
+        });
 
         socket.on("setKeys", (keys) => {
             setKeys(keys);
-        })
+        });
 
         socket.on("gameStart", () => {
             navigate('/game');
-        })
+        });
 
         socket.on('receiveMessage', (data) => {
             setMessages((prevMessages) => [...prevMessages, data]);
-          });
-
+        });
 
         return () => {
             socket.off("requestUserInfo");
             socket.off("userInfo");
             socket.off("receiveMessage");
-
         };
-
     }, []);
 
     const handleSendMessage = (e) => {
         e.preventDefault();
         if (input.trim()) {
-          socket.emit('sendMessage', input);
-          setInput('');
+            socket.emit('sendMessage', input);
+            setInput('');
         }
-      };
+    };
+
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setMouseOffset({
+            x: e.clientX - position.x,
+            y: e.clientY - position.y,
+        });
+    };
+
+    const handleMouseMove = (e) => {
+        if (isDragging) {
+            setPosition({
+                x: e.clientX - mouseOffset.x,
+                y: e.clientY - mouseOffset.y,
+            });
+        }
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    useEffect(() => {
+        if (isDragging) {
+            document.addEventListener("mousemove", handleMouseMove);
+            document.addEventListener("mouseup", handleMouseUp);
+        } else {
+            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
+        }
+        
+        return () => {
+            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
+        };
+    }, [isDragging]);
+
+    function handleChatButtonClick() {
+        clickAudio.play();
+        setIsChatOpen(true);
+    }
+
+    function handleCloseButtonClick() {
+        clickAudio.play();
+        setIsChatOpen(false);
+    }
 
     function goLeftClicked() {
         clickAudio.play();
@@ -94,26 +138,11 @@ const Lobby = () => {
         navigate('/game');
     }
 
-    function handleChatButtonClick(){
-        clickAudio.play();
-        setIsChatOpen(true);
-    }
-
-    function handleCloseButtonClick(){
-        clickAudio.play();
-        setIsChatOpen(false);
-    }
-
-    function handleReturnButtonClick(){
+    function handleReturnButtonClick() {
         socket.emit("removeUser");
         navigate('/');
     }
 
-    useEffect(() => {
-        console.log(users);
-    },[users]);
-
-    
     return (
         <div className="lobbybg">
             <div className="userListContainer">
@@ -127,59 +156,64 @@ const Lobby = () => {
                 </div>
             </div>
 
+            <button className='Return' onClick={handleReturnButtonClick}>Return</button>
 
-
-            <div>
-
-
-                <button className='Return' onClick={handleReturnButtonClick}>Return</button>
-            </div>
-            <div className='chooseModeWin'><p className='ChooseMode'> Choose your mode</p>
+            <div className='chooseModeWin'>
+                <p className='ChooseMode'>Choose your mode</p>
                 <div className='modeWinContent'>
-                    <button className='goLeft' onClick={goLeftClicked} >
-                        <p className='goLeftButt'>&lt;</p>
-                    </button>
-
-                    <div className='modewin'>
-                        <p className='Mode'>{mode[keys]}</p>
-                    </div>
-
-                    <button className='goRight' onClick={goRightClicked}>
-                        <p className='goRightButt'>&gt;</p>
-                    </button>
-
+                    <button className='goLeft' onClick={goLeftClicked}><p className='goLeftButt'>&lt;</p></button>
+                    <div className='modewin'><p className='Mode'>{mode[keys]}</p></div>
+                    <button className='goRight' onClick={goRightClicked}><p className='goRightButt'>&gt;</p></button>
                 </div>
                 <div className='ModeDes'>{modeDes[keys]}</div>
-                <div className='playButton'>
-                    <button className='Play' onClick={handlePlayButtonClick}><p className='Playtext'>Play</p></button>
-                </div>
+                <button className='Play' onClick={handlePlayButtonClick}><p className='Playtext'>Play</p></button>
             </div>
 
             <button className="Chatbox" onClick={handleChatButtonClick}>Chat</button>
 
+
+
             {isChatOpen && (
-                <>
-                    <div className="chat-overlay">
-                        <button className="close-chat" onClick={handleCloseButtonClick}>X</button>
-                        <div className="chat-messages">
-                            {messages.map((data, index) => (
-                                <div key={index} className="chat-message">{data.sender}: {data.message}</div>
-                            ))}
-                        </div>
-                        <form onSubmit={handleSendMessage}>
-                            <input
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                placeholder="Type a message..."
-                                className='Inputchat'
-                            />
-                            <button type="submit" className='SendButton'>Send</button>
-                        </form>
+                <div
+                    ref={chatWindowRef}
+                    className="chat-overlay"
+                    style={{
+                        left: `${position.x}px`,
+                        top: `${position.y}px`,
+                        position: 'absolute',
+                        width: '300px',
+                        height: '400px',
+                        backgroundColor: '#fff',
+                        boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+                    }}
+                >
+                    <div
+                        className="chat-header"
+                        onMouseDown={handleMouseDown}
+                        style={{
+                            cursor: 'grab',
+                        }}
+                    >
+                        <button className='close-chat' onClick={handleCloseButtonClick}>X</button>
                     </div>
-                </>
+                    <div className="chat-messages">
+                        {messages.map((data, index) => (
+                            <div key={index} className="chat-message">{data.sender}: {data.message}</div>
+                        ))}
+                    </div>
+                    <form onSubmit={handleSendMessage} style={{ display: 'flex', padding: '10px' }}>
+                        <input
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            placeholder="Type a message..."
+                            className="Inputchat"
+                        />
+                        <button type="submit" className="SendButton">Send</button>
+                    </form>
+                </div>
             )}
         </div>
     );
-}
+};
 
 export default Lobby;

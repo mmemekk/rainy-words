@@ -254,29 +254,32 @@
     font-size: 32px;
     padding: 0;
     width: 182px;
-    bottom: 5%;
-    position: absolute;
     border-radius: 32px;
     height: 64px;
     font-family: 'SuperMario256';
     text-align: center;
     justify-content: center;
     cursor:pointer;
+    position: absolute;
+    top:87%;
+    left: 45%;
+    transform: translate(-50%,-50);
 }
 
 .Chatbox{
     color: #000;
     font-size: 32px;
     width: 182px;
-    bottom: 5%;
     position: absolute;
     border-radius: 32px;
     height: 64px;
     font-family: 'SuperMario256';
     text-align: center;
     justify-content: center;
-    right: 2%;
     cursor:pointer;
+    top:87%;
+    left: 85%;
+    transform: translate(-50%,-50);
 }
 
 .chat-overlay {
@@ -299,12 +302,13 @@
     align-self: flex-end;
     background: transparent;
     border: none;
-    font-size: 20px;
+    font-size: 4vh;
     cursor: pointer;
     font-family: 'SuperMario256';
     color: #D73D3F;
     border: #D9D9D9;
     border-width: 2px;
+    float:right;
 
 }
 
@@ -315,6 +319,7 @@
 }
 
 .chat-message {
+    font-family: Verdana;
     padding: 5px;
     border-bottom: 1px solid #000;
 }
@@ -322,19 +327,22 @@
 .SendButton{
     font-family: 'SuperMario256';
     border: 0;
-    padding: 2%;
-    height: 3vh;
+    padding: 3%;
+    height: 4vh;
     border-radius: 32px;
     background-color: #D2A93F;
     color: #000;
+    line-height: 20px;
+    letter-spacing: 1px;
 }
 
 .Inputchat{
+    font-family: Verdana;
     width: 15vw;
     margin-right: 2%;
     border-radius: 32px;
     border-width: 0;
-    background-color: #000;
+    background-color: rgb(169, 168, 168);
     padding: 3%;
 }
 
