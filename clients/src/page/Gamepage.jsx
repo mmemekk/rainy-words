@@ -67,14 +67,14 @@ const Game = () => {
             setcountDown(time);
             const countDownAudio = new Audio("countdown.mp3");
             countDownAudio.volume = 0.1;
-            // countDownAudio.play();
+            countDownAudio.play();
         });
 
         socket.on("countDownEnd", () => {
             setstartMsg(true);
             const startAudio = new Audio("start.mp3");
             startAudio.volume = 0.1;
-            // startAudio.play();
+            startAudio.play();
             setTimeout(() => {
                 setstartMsg(false);
                 setpreGame(false);
